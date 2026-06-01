@@ -1,0 +1,127 @@
+/* =========================
+   LOGIN / CADASTRO
+   Depende de layout.css
+========================= */
+
+.container {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+}
+
+.login-wrapper {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* CARD DE FORMULÁRIO */
+.login-card {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.login-card h2 {
+    color: var(--text-title);
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.login-card h2 span {
+    font-size: 1.3rem;
+}
+
+/* GRUPO DE INPUT */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-body);
+}
+
+/* BOTÃO SUBMIT */
+.btn-submit {
+    width: 100%;
+    padding: 13px;
+    margin-top: 6px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    background: linear-gradient(135deg, var(--primaria), var(--primaria-hover));
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(0,86,179,0.22);
+}
+
+.btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,86,179,0.30);
+}
+
+.btn-submit.outline {
+    background: transparent;
+    color: var(--primaria);
+    border: 2px solid var(--primaria);
+    box-shadow: none;
+}
+
+.btn-submit.outline:hover {
+    background: rgba(0,86,179,0.06);
+    box-shadow: none;
+}
+
+/* MENSAGEM */
+#mensagem {
+    min-height: 20px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 12px;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+#mensagem.sucesso {
+    background: #dcfce7;
+    color: #166534;
+}
+
+#mensagem.erro {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+body.dark-mode #mensagem.sucesso {
+    background: rgba(22,101,52,0.3);
+    color: #86efac;
+}
+
+body.dark-mode #mensagem.erro {
+    background: rgba(153,27,27,0.3);
+    color: #fca5a5;
+}
+
+@media (max-width: 480px) {
+    .login-card { padding: 26px 20px; }
+}

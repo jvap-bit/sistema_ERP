@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S.I.U. - Sistema de Inventário Unificado</title>
+    <link rel="stylesheet" href="/app/assets/css/global.css">
+    <style>
+        .header-modulo {
+            background-color: #0056b3;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid #06b6d4; /* Cor azul do estoque */
+        }
+        .btn-voltar {
+            background: #64748b;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        nav {
+            margin-top: 10px;
+            display: flex;
+            gap: 10px;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header-modulo">
+        <div>
+            <small>Módulo de Operações</small>
+            <h2 style="margin: 0;">📦 Gestão de Inventário</h2>
+        </div>
+        <button class="btn-voltar" onclick="window.location.href='/app/app.html'">
+            ← Voltar ao Menu
+        </button>
+    </header>
+
+    <nav>
+        <button onclick="trocarTela('cadastro')">📥 Recebimento</button>
+        <button onclick="trocarTela('estoque')">📊 Controle de Estoque</button>
+    </nav>
+
+    <div id="tela-cadastro" class="container">
+        <h1>Entrada de Materiais</h1>
+        <div class="card">
+            <input type="text" id="nomeItem" placeholder="Nome do Produto">
+            <input type="number" id="qtdItem" placeholder="Quantidade Inicial">
+            <button id="btnRegistrar">Registrar no Sistema</button>
+        </div>
+
+        <div class="card" style="margin-top: 20px;">
+            <h3>Itens no Pátio (Aguardando Liberação)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Produto</th>
+                        <th>Qtd</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody id="corpoTabela">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="tela-estoque" class="container" style="display: none;">
+        <h1>Controle de Saída</h1>
+        <div class="card">
+            <h2 id="produtoSelecionado">Nenhum item selecionado</h2>
+            <div id="visorQtd" class="visor">0</div>
+            
+            <input type="number" id="valorMovimentacao" placeholder="Quantidade">
+            <div style="display: flex; gap: 10px;">
+                <button id="btnEntrada" style="background: #27ae60;">+ Entrada</button>
+                <button id="btnSaida" style="background: #c0392b;">- Saída</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/app/assets/js/estoque.js" defer></script>
+    <script defer src="../../assets/js/vlibras.js"></script>
+
+</body>
+</html>

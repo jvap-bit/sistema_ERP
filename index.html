@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <base href="./">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bem-vindo | LogiStock</title>
+    
+    <script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+    <link rel="stylesheet" href="public/assets/css/index.css">
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+
+
+    <main class="container">
+        <section class="hero-card fade">
+
+            <span class="tag">Sistema ERP Industrial</span>
+
+            <h1>Bem-vindo à <span>LogiStock</span></h1>
+
+            <p>
+                Plataforma inteligente para gestão industrial,
+                controle logístico, rastreio de pedidos e
+                automação operacional em tempo real.
+            </p>
+
+            <div class="botoes">
+                <a href="public/pages/login.html" class="btn-primary">Entrar no Sistema</a>
+                <a href="public/pages/sobre.html" class="btn-secondary">Conhecer Plataforma</a>
+            </div>
+
+            <div class="stats-home">
+                <div class="mini-card">
+                    <h3>+500</h3>
+                    <span>Empresas</span>
+                </div>
+                <div class="mini-card">
+                    <h3>24h</h3>
+                    <span>Monitoramento</span>
+                </div>
+                <div class="mini-card">
+                    <h3>100%</h3>
+                    <span>Cloud ERP</span>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="public/assets/js/component.js"></script>
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script defer src="public/assets/js/vlibras.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

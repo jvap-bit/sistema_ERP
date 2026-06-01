@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <base href="../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - LogiStock</title>
+    <script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+    <link rel="stylesheet" href="public/assets/css/contato.css">
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+
+        <div class="section-header">
+            <h3>📩 Central de Atendimento ao Cliente</h3>
+            <p>Conecte-se com nossa equipe de inteligência logística, suporte operacional ou comercial.</p>
+        </div>
+
+        <div class="contato-grid">
+
+            <!-- FORMULÁRIO -->
+            <article class="form-card">
+                <h3>Abrir Chamado Técnico / Comercial</h3>
+                <div class="form-body">
+                    <div class="form-group">
+                        <label>Nome do Solicitante / Empresa</label>
+                        <input type="text" placeholder="Ex: Logística Silva LTDA">
+                    </div>
+                    <div class="form-group">
+                        <label>E-mail Corporativo</label>
+                        <input type="email" placeholder="operacoes@logistock.com.br">
+                    </div>
+                    <div class="form-group">
+                        <label>Área de Interesse</label>
+                        <select>
+                            <option>Suporte à Roteirização e Rastreamento</option>
+                            <option>Cotação de Frete e Novos Contratos (Comercial)</option>
+                            <option>Agendamento de Carga/Descarga (Cross-Docking)</option>
+                            <option>Ouvidoria e SAC</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Especificações do Pedido / Mensagem</label>
+                        <textarea placeholder="Informe o código de rastreio, notas fiscais ou detalhes da sua demanda logística..."></textarea>
+                    </div>
+                    <button type="button" class="btn-submit">Enviar para Central</button>
+                </div>
+            </article>
+
+            <!-- SIDEBAR -->
+            <aside class="info-sidebar">
+                <div class="info-card">
+                    <h3>Hub Central LogiStock</h3>
+                    <p>
+                        Rodovia dos Bandeirantes, Km 45<br>
+                        Complexo Logístico Aero-Terrestre<br>
+                        CEP: 13000-000 — Jundiaí/SP
+                    </p>
+                    <a href="https://maps.google.com/?q=Rodovia+dos+Bandeirantes,+Km+45,+Jundiai" target="_blank">
+                        Rotas de Acesso de Caminhões →
+                    </a>
+                </div>
+
+                <div class="info-card destaque">
+                    <h3>Torre de Controle (24/7)</h3>
+                    <p>
+                        <strong>0800 do Transportador:</strong> 0800 770 1234<br>
+                        <strong>Suporte Motorista (WhatsApp):</strong> (11) 99876-5432
+                    </p>
+                    <p style="margin-top: 10px; font-size: 0.8rem;">Monitoramento ininterrupto de frotas e sinistros.</p>
+                </div>
+            </aside>
+
+        </div>
+
+        <!-- STATUS DOS HUBS -->
+        <section>
+            <p class="secao-titulo">📊 Tempo de Pátio e Fluxo de Docas Atual</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Terminal Logístico (Hub)</th>
+                        <th>Status Operacional</th>
+                        <th>Espera Média (Doca)</th>
+                        <th>Capacidade do Pátio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hub São Paulo (Matriz)</td>
+                        <td><span class="status-fluido">● Operação Fluida</span></td>
+                        <td>~ 14 min</td>
+                        <td>42% ocupado</td>
+                    </tr>
+                    <tr>
+                        <td>Hub Curitiba (Filial Sul)</td>
+                        <td><span class="status-intenso">● Fluxo Intenso</span></td>
+                        <td>~ 35 min</td>
+                        <td>88% ocupado</td>
+                    </tr>
+                    <tr>
+                        <td>Hub Recife (Filial Nordeste)</td>
+                        <td><span class="status-fluido">● Operação Fluida</span></td>
+                        <td>~ 8 min</td>
+                        <td>15% ocupado</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="public/assets/js/component.js"></script>
+    <script src="public/assets/js/contato.js"></script>
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script defer src="public/assets/js/vlibras.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

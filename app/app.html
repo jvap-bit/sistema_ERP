@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERP Industrial - Dashboard</title>
+    <!-- Aplica tema antes do render para evitar flash -->
+    <script>
+        (function() {
+            if (localStorage.getItem('tema') === 'dark') {
+                document.documentElement.style.backgroundColor = '#0f172a';
+            }
+        })();
+    </script>
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div class="header">
+        <div class="user-info">
+            <h1>Painel ERP</h1>
+            <p id="usuario">Bem-vindo, Usuário!</p>
+        </div>
+
+        <div class="header-actions">
+            <div class="theme-toggle-wrapper" title="Alternar tema claro/escuro">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="theme-toggle" onchange="alternarTema()">
+                    <span class="slider"></span>
+                </label>
+                <span class="theme-label" id="theme-label">Claro</span>
+            </div>
+
+            <button class="btn-sair" onclick="logout()">Sair</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid-modulos">
+            <div class="card" onclick="abrirModulo('estoque')">
+                <h3>📦 Gestão de Inventário</h3>
+                <p>Controle de entrada e saída de materiais.</p>
+            </div>
+            <div class="card" onclick="abrirModulo('manutencao')">
+                <h3>🔧 Manutenção Ativa</h3>
+                <p>Registro e preventivas de máquinas.</p>
+            </div>
+            <div class="card" onclick="abrirModulo('ponto')">
+                <h3>🧑‍💼 RH & Ponto Digital</h3>
+                <p>Registro de jornada dos funcionários.</p>
+            </div>
+            <div class="card" onclick="window.location.href='/app/modules/ordens_pedido/ordens.html'">
+                <h3>📋 Ordens de Serviço</h3>
+                <p>Gestão de pedidos de produção.</p>
+            </div>
+            <div class="card" onclick="abrirModulo('qualidade')">
+                <h3>✅ Controle de Qualidade</h3>
+                <p>Inspeção e relatórios de conformidade.</p>
+            </div>
+            <div class="card" onclick="abrirModulo('suprimentos')">
+                <h3>🛒 Suprimentos</h3>
+                <p>Gestão de compras e fornecedores.</p>
+            </div>
+            <div class="card" onclick="abrirModulo('producao')">
+                <h3>🏭 Linha de Produção</h3>
+                <p>Monitoramento industrial em tempo real.</p>
+            </div>
+            <div class="card" onclick="abrirModulo('treinamento')">
+                <h3>🎓 Portal de Treinamentos</h3>
+                <p>Capacitação e cursos internos.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ── CHATBOT ASSISTENTE IA ── -->
+    <div class="chatbot-container minimized" id="chatbot-container" onclick="if(this.classList.contains('minimized')) toggleChatBot()">
+      <div class="chatbot-header" id="chatbot-header">
+        <svg class="chatbot-icon-mini" width="28" height="28" viewBox="0 0 32 32" fill="none" stroke="white" stroke-width="2">
+          <rect x="4" y="4" width="20" height="20" rx="4" ry="4"/>
+          <text x="14" y="20" font-size="12" font-weight="bold" text-anchor="middle" fill="white" font-family="Arial">IA</text>
+        </svg>
+        <div class="chatbot-title chatbot-title-text">
+          <i class="fa-solid fa-robot" style="color:var(--cb-blue)"></i>
+          Assistente IA
+          <span class="voice-status" id="voice-status"></span>
+        </div>
+        <div class="chatbot-header-actions">
+          <button onclick="event.stopPropagation(); toggleChatBot()" title="Minimizar">
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="chatbot-messages" id="chatbot-messages">
+        <div class="message-group assistant-msg">
+          <div class="message-bubble">
+            <p>Olá! 👋 Sou o assistente do <strong>ERP Industrial</strong>. Posso ajudar com:</p>
+            <ul style="margin-top:8px;font-size:13px;line-height:1.8">
+              <li>📦 Abrir módulos do sistema</li>
+              <li>📋 Consultar ordens de serviço</li>
+              <li>🎤 Comandos por <strong>voz</strong></li>
+              <li>🌙 Alternar tema claro/escuro</li>
+            </ul>
+            <p style="margin-top:8px;font-size:12px;color:#64748b">Diga "ajuda" para ver todos os comandos.</p>
+          </div>
+          <span class="message-time">agora</span>
+        </div>
+      </div>
+
+      <div class="chatbot-input-area">
+        <button class="voice-btn" id="voice-btn" onclick="toggleVoiceRecognition()" title="Clique para falar">
+          <i class="fa-solid fa-microphone" id="mic-icon"></i>
+        </button>
+        <input
+          type="text"
+          id="chatbot-input"
+          class="chatbot-input"
+          placeholder="Digite ou use o microfone..."
+          onkeypress="if(event.key==='Enter') sendChatMessage()"
+        >
+        <button class="chatbot-send-btn" onclick="sendChatMessage()" id="chatbot-send">
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+
+      <div class="chatbot-footer">
+        <label class="voice-toggle">
+          <input type="checkbox" id="voice-response-toggle" checked>
+          <span>Resposta por voz</span>
+        </label>
+        <small>Assistente Local</small>
+      </div>
+    </div>
+
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/chatbot.js"></script>
+    <script defer src="../app/assets/js/vlibras.js"></script>
+</body>
+</html>

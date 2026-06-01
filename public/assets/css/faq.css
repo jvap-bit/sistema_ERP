@@ -1,0 +1,111 @@
+/* =========================
+   FAQ
+   Depende de layout.css
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 16px 60px;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.titulo h2 {
+    font-size: 2rem;
+    color: var(--text-title);
+    margin-bottom: 8px;
+    font-weight: 800;
+}
+
+.titulo p {
+    color: var(--text-body);
+    font-size: 0.95rem;
+}
+
+/* BUSCA */
+.busca-faq {
+    margin-bottom: 28px;
+}
+
+/* ITEM FAQ */
+.faq-item {
+    background: var(--bg-card);
+    margin-bottom: 10px;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    transition: box-shadow 0.3s;
+}
+
+.faq-item:hover {
+    box-shadow: var(--shadow-md);
+}
+
+.faq-item.oculto { display: none; }
+
+/* BOTÃO PERGUNTA */
+.faq-question {
+    width: 100%;
+    background: var(--bg-card);
+    border: none;
+    outline: none;
+    padding: 20px 52px 20px 22px;
+    text-align: left;
+    font-size: 0.97rem;
+    font-weight: 700;
+    color: var(--text-title);
+    cursor: pointer;
+    transition: background 0.25s;
+    position: relative;
+    font-family: inherit;
+}
+
+.faq-question:hover {
+    background: var(--bg-card-hover);
+}
+
+.faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.4rem;
+    color: var(--secundaria);
+    font-weight: 300;
+    line-height: 1;
+}
+
+.faq-item.aberto .faq-question::after { content: '−'; }
+
+/* RESPOSTA */
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    background: var(--bg-page);
+    padding: 0 22px;
+    border-top: 0px solid var(--border);
+}
+
+.faq-item.aberto .faq-answer {
+    border-top-width: 1px;
+}
+
+.faq-answer p {
+    padding: 16px 0;
+    line-height: 1.75;
+    color: var(--text-body);
+    font-size: 0.91rem;
+}
+
+@media (max-width: 600px) {
+    .titulo h2 { font-size: 1.5rem; }
+    .faq-question { font-size: 0.9rem; padding-right: 44px; }
+}

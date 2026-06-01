@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<base href="../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Funcionalidades | LogiStock</title>
+
+<script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+<link rel="stylesheet" href="public/assets/css/funcionalidades.css">
+
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div id="header"></div>
+
+<!-- CONTEÚDO -->
+<main class="container">
+
+    <section class="card fade">
+
+        <div class="topo">
+            <span class="tag">Sistema ERP Industrial</span>
+
+            <h1>Funcionalidades LogiStock</h1>
+
+            <p class="subtitulo">
+                Tudo o que sua empresa precisa para controlar estoque,
+                produção e resultados em um único sistema moderno.
+            </p>
+        </div>
+
+        <!-- GRID -->
+        <div class="funcionalidades-grid">
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/prancheta.png" alt="Prancheta">
+                </div>
+
+                <h3>Gestão de Pedidos (PCP)</h3>
+
+                <p>
+                    Abertura de OPs com integração de CEP
+                    e definição inteligente de prioridades.
+                </p>
+            </div>
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/guindaste.png" alt="Guindaste">
+                </div>
+
+                <h3>Kanban Dinâmico</h3>
+
+                <p>
+                    Controle visual da produção com atualização
+                    instantânea do status operacional.
+                </p>
+            </div>
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/caminhao.png" alt="Caminhão">
+                </div>
+
+                <h3>Painel do Entregador</h3>
+
+                <p>
+                    Interface otimizada para logística e confirmação
+                    de entregas em tempo real.
+                </p>
+            </div>
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/pdf.png" alt="PDF">
+                </div>
+
+                <h3>Emissão de PDFs</h3>
+
+                <p>
+                    Geração automática de ordens de produção
+                    prontas para impressão.
+                </p>
+            </div>
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/xls.png" alt="Excel">
+                </div>
+
+                <h3>Exportação Excel</h3>
+
+                <p>
+                    Relatórios completos e integração com
+                    planilhas gerenciais inteligentes.
+                </p>
+            </div>
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/cadeado.png" alt="Segurança">
+                </div>
+
+                <h3>Auditoria de Logs</h3>
+
+                <p>
+                    Registro completo de ações realizadas
+                    dentro do sistema.
+                </p>
+            </div>
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/lupa.png" alt="Rastreio">
+                </div>
+
+                <h3>Rastreio Inteligente</h3>
+
+                <p>
+                    Localize pedidos e cargas rapidamente
+                    em qualquer etapa da operação.
+                </p>
+            </div>
+
+            <!-- ITEM -->
+            <div class="func-item">
+                <div class="icone-box">
+                    <img src="public/assets/img/disquete.png" alt="Banco de dados">
+                </div>
+
+                <h3>Persistência SQLite</h3>
+
+                <p>
+                    Banco de dados robusto garantindo
+                    velocidade e segurança das informações.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<div id="footer"></div>
+
+<script src="public/assets/js/component.js"></script>
+<script src="public/assets/js/funcionalidades.js"></script>
+<script defer src="public/assets/js/vlibras.js"></script>
+
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

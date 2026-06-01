@@ -1,0 +1,145 @@
+/* =========================
+   DEPOIMENTOS
+   Depende de layout.css
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 16px 60px;
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.titulo h2 {
+    font-size: 2rem;
+    color: var(--text-title);
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.titulo p {
+    color: var(--text-body);
+    font-size: 0.95rem;
+}
+
+/* GRADE */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 22px;
+}
+
+/* CARD */
+.card {
+    background: var(--bg-card);
+    padding: 26px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--border);
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.card.visivel {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.3s, border-color 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--secundaria);
+}
+
+/* CLIENTE */
+.cliente {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primaria), var(--secundaria));
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.cliente h3 {
+    font-size: 0.97rem;
+    color: var(--text-title);
+    margin-bottom: 2px;
+    font-weight: 700;
+}
+
+.cliente small {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.card > p {
+    color: var(--text-body);
+    line-height: 1.7;
+    font-size: 0.91rem;
+    margin-bottom: 14px;
+}
+
+.estrelas {
+    color: #f59e0b;
+    font-size: 17px;
+    letter-spacing: 2px;
+}
+
+/* FILTROS */
+.filtros {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+}
+
+.filtros button {
+    padding: 7px 18px;
+    border: 2px solid var(--secundaria);
+    background: var(--bg-card);
+    color: var(--secundaria);
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.84rem;
+    font-weight: 700;
+    transition: var(--transition);
+    font-family: inherit;
+}
+
+.filtros button:hover,
+.filtros button.ativo {
+    background: var(--secundaria);
+    color: #fff;
+}
+
+/* RESUMO DE AVALIAÇÕES */
+#resumo-avaliacoes {
+    color: var(--text-body);
+    font-size: 0.92rem;
+}
+
+@media (max-width: 600px) {
+    .titulo h2 { font-size: 1.5rem; }
+    .cards { grid-template-columns: 1fr; }
+}

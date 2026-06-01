@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <base href="../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiStock - Integrações</title>
+
+    <script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+    <link rel="stylesheet" href="public/assets/css/integracoes.css">
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container integracoes-main">
+
+        <div class="integracoes-page">
+
+            <div class="integracoes-header">
+                <h2>Integrações Inteligentes</h2>
+                <p>Conecte a LogiStock com as ferramentas que sua indústria já utiliza no dia a dia</p>
+            </div>
+
+            <div class="integracoes-grid">
+                <div class="integracao-card" data-index="0">
+                    <div class="icon-box">⚙️</div>
+                    <h4>ERPs de Mercado</h4>
+                    <p>Sincronização nativa e em tempo real com plataformas corporativas como SAP, TOTVS e Senior.</p>
+                </div>
+
+                <div class="integracao-card" data-index="1">
+                    <div class="icon-box">📦</div>
+                    <h4>E-commerce / WMS</h4>
+                    <p>Integre seus canais de venda externos para dar baixa e atualizar seus estoques instantaneamente.</p>
+                </div>
+
+                <div class="integracao-card" data-index="2">
+                    <div class="icon-box">📊</div>
+                    <h4>Ferramentas de BI</h4>
+                    <p>Exporte métricas de performance e relatórios diretamente para o Power BI, Tableau ou Metabase.</p>
+                </div>
+
+                <div class="integracao-card" data-index="3">
+                    <div class="icon-box">🔌</div>
+                    <h4>API Aberta Restful</h4>
+                    <p>Desenvolva conexões customizadas e sob medida para sistemas legados ou internos da sua fábrica.</p>
+                </div>
+            </div>
+
+            <div class="integracoes-footer">
+                <p>Não encontrou o sistema que a sua empresa utiliza?</p>
+                <button class="btn-contato-integra" id="btnContatoIntegra">Falar com o time técnico</button>
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="public/assets/js/component.js"></script>
+    <script src="public/assets/js/integracoes.js"></script>
+
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script defer src="public/assets/js/vlibras.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

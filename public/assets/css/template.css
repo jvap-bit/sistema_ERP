@@ -1,0 +1,18 @@
+/* TEMPLATE — Estilos de exemplo para novas páginas.
+   Sempre importe layout.css primeiro. */
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.card h1 {
+    color: var(--text-title);
+    margin-bottom: 14px;
+}
+
+.card p {
+    color: var(--text-body);
+    line-height: 1.7;
+}

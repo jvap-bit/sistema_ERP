@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <base href="../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | LogiStock - ERP Industrial</title>
+
+    <!-- CSS GLOBAL (OBRIGATÓRIO) -->
+    <script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+
+    <!-- CSS DA PÁGINA -->
+    <link rel="stylesheet" href="public/assets/css/faq.css">
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <!-- CONTEÚDO DA PÁGINA -->
+    <main>
+        <section class="container">
+
+            <div class="titulo">
+                <h2>Perguntas Frequentes</h2>
+                <p>Tire suas dúvidas rapidamente.</p>
+            </div>
+
+            <!-- BUSCA -->
+            <input
+                type="text"
+                id="busca-faq"
+                class="busca-faq"
+                placeholder="🔍 Buscar pergunta..."
+                autocomplete="off"
+            >
+
+            <!-- ITENS DO FAQ -->
+            <div class="faq-item">
+                <button class="faq-question">Como rastrear minha entrega?</button>
+                <div class="faq-answer">
+                    <p>Você pode rastrear sua entrega utilizando o código enviado por e-mail após a confirmação do envio. Acesse a área "Rastreamento" no menu principal e insira o código.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Qual o prazo médio de entrega?</button>
+                <div class="faq-answer">
+                    <p>O prazo varia conforme a região, mas geralmente entregamos entre 2 e 7 dias úteis. Para grandes centros como São Paulo e Rio de Janeiro, o prazo costuma ser de 1 a 3 dias úteis.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Vocês fazem entregas para todo o Brasil?</button>
+                <div class="faq-answer">
+                    <p>Sim, atendemos todas as regiões do Brasil com diferentes modalidades de frete: econômico, expresso e dedicado para cargas especiais.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Como entrar em contato com o suporte?</button>
+                <div class="faq-answer">
+                    <p>Nosso suporte funciona 24h via e-mail, telefone e WhatsApp. Você também pode abrir um chamado técnico diretamente pela página de Contato do sistema.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Como faço para contratar um plano?</button>
+                <div class="faq-answer">
+                    <p>Acesse a página de Planos, escolha o pacote que melhor se adequa à sua operação e clique em "Contratar". Um de nossos consultores entrará em contato em até 2 horas úteis.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">O sistema possui integração com outros ERPs?</button>
+                <div class="faq-answer">
+                    <p>Sim! A LogiStock oferece integração via API REST com os principais ERPs do mercado, incluindo SAP, TOTVS e Oracle. Consulte a página de Integrações para ver a lista completa.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question">Posso cancelar meu plano a qualquer momento?</button>
+                <div class="faq-answer">
+                    <p>Sim. Você pode cancelar seu plano a qualquer momento sem multa, desde que respeite o aviso prévio de 30 dias. Todos os seus dados ficam disponíveis para exportação por 60 dias após o cancelamento.</p>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- COMPONENTES -->
+    <script src="public/assets/js/component.js"></script>
+
+    <!-- JS DA PÁGINA -->
+    <script src="public/assets/js/faq.js"></script>
+
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script defer src="public/assets/js/vlibras.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

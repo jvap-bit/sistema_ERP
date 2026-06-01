@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <base href="../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog | LogiStock</title>
+    <script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+    <link rel="stylesheet" href="public/assets/css/blog.css">
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+
+        <!-- BANNER DESTAQUE -->
+        <section class="blog-banner">
+            <img src="public/assets/img/image.jpg" alt="Destaque Industrial">
+            <div class="blog-banner-content">
+                <h2>Destaque do Mês: A Nova Era da Logística</h2>
+                <p>Confira as diretrizes da convenção industrial 2026.</p>
+            </div>
+        </section>
+
+        <!-- KPIs -->
+        <section class="kpi-grid">
+            <div class="kpi-card">
+                <small>Entregas No Prazo (OTIF)</small>
+                <h3>99,8%</h3>
+                <span class="kpi-delta positivo">▲ 1.2% acima da meta global</span>
+            </div>
+            <div class="kpi-card" style="border-left-color: #f59e0b;">
+                <small>Giro de Estoque (Hub Central)</small>
+                <h3>18m 45s</h3>
+                <span class="kpi-delta neutro">Tempo médio de cross-docking</span>
+            </div>
+            <div class="kpi-card" style="border-left-color: var(--primaria);">
+                <small>Frota Rastreada em Tempo Real</small>
+                <h3>1.150</h3>
+                <span class="kpi-delta positivo">▲ 100% dos veículos conectados</span>
+            </div>
+        </section>
+
+        <!-- ARTIGOS -->
+        <section class="artigos-grid">
+            <article class="artigo-card">
+                <h3>Roteirização Precognitiva Logistock</h3>
+                <p>Nosso sistema exclusivo cruza dados climáticos, tráfego em tempo real e IA preditiva para recalcular rotas antes mesmo que o caminhão encontre o congestionamento, garantindo 99,8% de entregas no prazo.</p>
+            </article>
+            <article class="artigo-card" style="border-left-color: #f59e0b;">
+                <h3>Smart Stock & Armazenagem Zero</h3>
+                <p>Com braços robóticos e esteiras inteligentes integradas ao nosso software, o tempo de permanência da carga no Hub Central foi reduzido para minutos. Seu produto não fica parado, ele circula.</p>
+            </article>
+            <article class="artigo-card" style="border-left-color: var(--primaria);">
+                <h3>Monitoramento Holográfico de Frota</h3>
+                <p>A LogiStock oferece aos clientes uma central de rastreamento com telemetria avançada e atualizações via satélite a cada segundo, permitindo intervenções remotas imediatas em caso de anomalias.</p>
+            </article>
+        </section>
+
+        <!-- GRÁFICO E TABELA -->
+        <section>
+            <p class="secao-titulo">📊 Volume de Cargas Movimentadas por Segmento</p>
+
+            <div class="dashboard-container">
+                <div class="chart-pizza"></div>
+
+                <div style="flex: 1; min-width: 260px;">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Cor</th>
+                                <th>Segmento de Operação</th>
+                                <th>Volume Mensal</th>
+                                <th>Part.</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="label-cor" style="background: var(--secundaria);"></span></td>
+                                <td>Logística Industrial (B2B)</td>
+                                <td>11.182 ton</td>
+                                <td><strong>45%</strong></td>
+                            </tr>
+                            <tr>
+                                <td><span class="label-cor" style="background: var(--primaria);"></span></td>
+                                <td>Distribuição E-commerce (B2C)</td>
+                                <td>7.455 ton</td>
+                                <td><strong>30%</strong></td>
+                            </tr>
+                            <tr>
+                                <td><span class="label-cor" style="background: #a5f3fc;"></span></td>
+                                <td>Logística Reversa / Retornos</td>
+                                <td>6.212 ton</td>
+                                <td><strong>25%</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="public/assets/js/component.js"></script>
+    <script src="public/assets/js/blog.js"></script>
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script defer src="public/assets/js/vlibras.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

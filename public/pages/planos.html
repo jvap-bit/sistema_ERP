@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <base href="../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiStock - Planos</title>
+
+    <script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+    <link rel="stylesheet" href="public/assets/css/planos.css">
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <main class="container">
+
+        <div class="card fade">
+
+            <div class="planos-header">
+                <h2>Planos e Preços</h2>
+                <p>Escolha a solução ideal para o tamanho da sua operação industrial</p>
+
+                <div class="planos-toggle">
+                    <span id="labelMensal" class="toggle-label ativo">Mensal</span>
+                    <button class="toggle-btn" id="toggleCobranca" aria-label="Alternar entre mensal e anual">
+                        <span class="toggle-thumb"></span>
+                    </button>
+                    <span id="labelAnual" class="toggle-label">Anual <em class="desconto-badge">-20%</em></span>
+                </div>
+            </div>
+
+            <div class="planos-grid">
+
+                <div class="plano-card">
+                    <h3>Starter</h3>
+                    <div class="preco">
+                        <span class="valor" data-mensal="499" data-anual="399">R$ 499</span>
+                        <span class="periodo">/mês</span>
+                    </div>
+                    <p class="plano-desc">Ideal para pequenas indústrias que estão começando a digitalizar a logística.</p>
+                    <ul class="plano-beneficios">
+                        <li>✓ Controle de estoque básico</li>
+                        <li>✓ Até 500 pedidos/mês</li>
+                        <li>✓ Suporte por e-mail</li>
+                        <li>✓ 2 Usuários inclusos</li>
+                    </ul>
+                    <button class="btn-plano" data-plano="Starter">Começar Agora</button>
+                </div>
+
+                <div class="plano-card destaque">
+                    <div class="badge-destaque">Mais Vendido</div>
+                    <h3>Pro Industrial</h3>
+                    <div class="preco">
+                        <span class="valor" data-mensal="1299" data-anual="1039">R$ 1.299</span>
+                        <span class="periodo">/mês</span>
+                    </div>
+                    <p class="plano-desc">A solução completa para gestão, rastreio em tempo real e automação eficiente.</p>
+                    <ul class="plano-beneficios">
+                        <li>✓ Tudo do plano Starter</li>
+                        <li>✓ Rastreio de pedidos em tempo real</li>
+                        <li>✓ Monitoramento 24h automatizado</li>
+                        <li>✓ Relatórios e BI avançados</li>
+                        <li>✓ Usuários ilimitados</li>
+                    </ul>
+                    <button class="btn-plano btn-destaque" data-plano="Pro Industrial">Testar Gratuitamente</button>
+                </div>
+
+                <div class="plano-card">
+                    <h3>Enterprise</h3>
+                    <div class="preco">
+                        <span class="valor valor-consulta">Sob Consulta</span>
+                    </div>
+                    <p class="plano-desc">Para grandes plantas industriais que exigem customização avançada e integrações robustas.</p>
+                    <ul class="plano-beneficios">
+                        <li>✓ Infraestrutura em Nuvem Dedicada</li>
+                        <li>✓ Integrações completas via API</li>
+                        <li>✓ Gerente de conta exclusivo</li>
+                        <li>✓ SLA de suporte garantido</li>
+                        <li>✓ Customizações sob demanda</li>
+                    </ul>
+                    <button class="btn-plano" data-plano="Enterprise">Falar com Especialista</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <div id="footer"></div>
+
+    <script src="public/assets/js/component.js"></script>
+    <script src="public/assets/js/planos.js"></script>
+
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script defer src="public/assets/js/vlibras.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+/* =========================
+   INTEGRAÇÕES
+   Depende de layout.css
+========================= */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 20px 60px;
+}
+
+.integracoes-page {
+    width: 100%;
+    text-align: center;
+}
+
+/* HEADER */
+.integracoes-header {
+    margin-bottom: 48px;
+}
+
+.integracoes-header h2 {
+    font-size: 2.3rem;
+    color: var(--text-title);
+    margin-bottom: 12px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.integracoes-header p {
+    color: var(--text-body);
+    font-size: 1rem;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.65;
+}
+
+/* GRID */
+.integracoes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 22px;
+    margin-bottom: 40px;
+}
+
+/* CARD */
+.integracao-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px 24px;
+    text-align: left;
+    transition: var(--transition);
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.integracao-card.visivel {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.integracao-card:hover {
+    border-color: var(--primaria);
+    box-shadow: var(--shadow-hover);
+    transform: translateY(-5px);
+}
+
+body.dark-mode .integracao-card:hover {
+    border-color: var(--secundaria);
+}
+
+/* ÍCONE */
+.icon-box {
+    font-size: 1.9rem;
+    background: var(--tag-bg);
+    width: 58px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    transition: background 0.3s;
+}
+
+.integracao-card:hover .icon-box {
+    background: rgba(0,86,179,0.12);
+}
+
+body.dark-mode .icon-box { background: rgba(56,189,248,0.12); }
+body.dark-mode .integracao-card:hover .icon-box { background: rgba(56,189,248,0.2); }
+
+/* TEXTO */
+.integracao-card h4 {
+    font-size: 1.1rem;
+    color: var(--text-title);
+    margin-bottom: 10px;
+    font-weight: 700;
+}
+
+.integracao-card p {
+    color: var(--text-body);
+    font-size: 0.92rem;
+    line-height: 1.65;
+}
+
+/* RODAPÉ CTA */
+.integracoes-footer {
+    background: var(--bg-page);
+    border-radius: 18px;
+    padding: 32px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    border: 1px solid var(--border);
+}
+
+.integracoes-footer p {
+    color: var(--text-title);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.btn-contato-integra {
+    background: var(--primaria);
+    color: white;
+    border: none;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 6px 18px rgba(0,86,179,0.22);
+}
+
+.btn-contato-integra:hover {
+    background: var(--primaria-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0,86,179,0.30);
+}
+
+body.dark-mode .btn-contato-integra {
+    background: var(--secundaria);
+    color: #0f172a;
+}
+
+@media (max-width: 768px) {
+    .integracoes-header h2 { font-size: 1.8rem; }
+    .integracoes-grid { grid-template-columns: 1fr; }
+}

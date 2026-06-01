@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <base href="../../">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Depoimentos | LogiStock - ERP Industrial</title>
+
+    <!-- CSS GLOBAL (OBRIGATÓRIO) -->
+    <script src="public/assets/js/theme.js"></script>
+    <link rel="stylesheet" href="public/assets/css/layout.css">
+
+    <!-- CSS DA PÁGINA -->
+    <link rel="stylesheet" href="public/assets/css/depoimentos.css">
+    <link rel="stylesheet" href="public/assets/css/chatbot.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div id="header"></div>
+
+    <!-- CONTEÚDO DA PÁGINA -->
+    <main>
+        <section class="container">
+
+            <div class="titulo">
+                <h2>O que nossos clientes dizem</h2>
+                <p>Confiança e agilidade em cada entrega.</p>
+            </div>
+
+            <!-- RESUMO DE AVALIAÇÕES (preenchido pelo JS) -->
+            <div id="resumo-avaliacoes" style="text-align:center;margin-bottom:24px;"></div>
+
+            <!-- FILTROS POR ESTRELAS -->
+            <div class="filtros" id="filtros-depoimentos">
+                <button data-estrelas="todos" class="ativo">Todos</button>
+                <button data-estrelas="5">★★★★★</button>
+                <button data-estrelas="4">★★★★☆</button>
+                <button data-estrelas="3">★★★☆☆</button>
+            </div>
+
+            <!-- CARDS DE DEPOIMENTOS -->
+            <div class="cards">
+
+                <div class="card">
+                    <div class="cliente">
+                        <div class="avatar">M</div>
+                        <div>
+                            <h3>Marcos Silva</h3>
+                            <small>São Paulo - SP</small>
+                        </div>
+                    </div>
+                    <p>A entrega chegou antes do prazo e o suporte foi excelente durante todo o processo.</p>
+                    <div class="estrelas">★★★★★</div>
+                </div>
+
+                <div class="card">
+                    <div class="cliente">
+                        <div class="avatar">A</div>
+                        <div>
+                            <h3>Ana Souza</h3>
+                            <small>Campinas - SP</small>
+                        </div>
+                    </div>
+                    <p>Serviço muito profissional. Uso a LogiStock para minhas entregas empresariais há mais de 2 anos.</p>
+                    <div class="estrelas">★★★★★</div>
+                </div>
+
+                <div class="card">
+                    <div class="cliente">
+                        <div class="avatar">R</div>
+                        <div>
+                            <h3>Ricardo Lima</h3>
+                            <small>Rio de Janeiro - RJ</small>
+                        </div>
+                    </div>
+                    <p>Rastreamento simples e atendimento rápido. Recomendo para qualquer empresa.</p>
+                    <div class="estrelas">★★★★☆</div>
+                </div>
+
+                <div class="card extra">
+                    <div class="cliente">
+                        <div class="avatar">F</div>
+                        <div>
+                            <h3>Fernanda Costa</h3>
+                            <small>Curitiba - PR</small>
+                        </div>
+                    </div>
+                    <p>Integração com nosso ERP foi tranquila e a equipe de suporte muito atenciosa.</p>
+                    <div class="estrelas">★★★★★</div>
+                </div>
+
+                <div class="card extra">
+                    <div class="cliente">
+                        <div class="avatar">G</div>
+                        <div>
+                            <h3>Gabriel Martins</h3>
+                            <small>Belo Horizonte - MG</small>
+                        </div>
+                    </div>
+                    <p>O painel de controle é intuitivo e os relatórios me ajudam muito na tomada de decisão.</p>
+                    <div class="estrelas">★★★★★</div>
+                </div>
+
+                <div class="card extra">
+                    <div class="cliente">
+                        <div class="avatar">P</div>
+                        <div>
+                            <h3>Patrícia Rocha</h3>
+                            <small>Porto Alegre - RS</small>
+                        </div>
+                    </div>
+                    <p>Desde que migramos para a LogiStock, reduzimos os erros de estoque em quase 40%.</p>
+                    <div class="estrelas">★★★★☆</div>
+                </div>
+
+            </div>
+
+            <!-- VER MAIS -->
+            <div style="text-align:center;margin-top:32px;">
+                <button id="btn-ver-mais" style="
+                    padding: 12px 28px;
+                    background: linear-gradient(135deg,#0056b3,#06b6d4);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    font-size: 0.95rem;
+                    cursor: pointer;
+                    font-weight: 600;
+                    transition: opacity 0.2s;
+                ">Ver mais depoimentos ▼</button>
+            </div>
+
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <div id="footer"></div>
+
+    <!-- COMPONENTES -->
+    <script src="public/assets/js/component.js"></script>
+
+    <!-- JS DA PÁGINA -->
+    <script src="public/assets/js/depoimentos.js"></script>
+
+    <div id="chatbot-root"></div>
+    <script src="public/assets/js/chatbot.js"></script>
+    <script defer src="public/assets/js/vlibras.js"></script>
+    <script>
+      fetch("public/components/chatbot.html").then(r=>r.text()).then(h=>{ document.getElementById("chatbot-root").innerHTML=h; });
+    </script>
+</body>
+</html>

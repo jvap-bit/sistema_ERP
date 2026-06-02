@@ -29,7 +29,7 @@
     top: -140px;
     right: -140px;
     border-radius: 50%;
-    background: radial-gradient(rgba(6,182,212,0.10), transparent 70%);
+    background: radial-gradient(rgba(245,197,24,0.10), transparent 70%);
     pointer-events: none;
 }
 

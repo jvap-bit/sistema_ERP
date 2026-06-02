@@ -33,7 +33,7 @@ body.dark-mode .titulo-centro { color: var(--secundaria); }
     width: 100px;
     height: 4px;
     border-radius: 20px;
-    background: linear-gradient(90deg, var(--secundaria), var(--primaria));
+    background: linear-gradient(90deg, var(--yellow), var(--yellow2));
 }
 
 /* CARD PRINCIPAL */
@@ -70,7 +70,7 @@ body.dark-mode .titulo-centro { color: var(--secundaria); }
     letter-spacing: -1.5px;
     line-height: 1.15;
     margin-bottom: 30px;
-    background: linear-gradient(90deg, var(--primaria), var(--secundaria));
+    background: linear-gradient(90deg, var(--yellow, #F5C518), var(--yellow2, #FFD740));
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -206,7 +206,7 @@ body.dark-mode .destaque-nome { color: var(--secundaria); }
     top: 0; left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, var(--primaria), var(--secundaria));
+    background: linear-gradient(90deg, var(--yellow, #F5C518), var(--yellow2, #FFD740));
 }
 
 .conquista-card:hover {
@@ -239,7 +239,7 @@ body.dark-mode .destaque-nome { color: var(--secundaria); }
 }
 
 .destaque-azul {
-    background: linear-gradient(135deg, var(--primaria), var(--primaria-hover));
+    background: linear-gradient(135deg, var(--navy, #0A1628), var(--navy2, #162040));
     border: none;
 }
 

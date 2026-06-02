@@ -1,80 +1,134 @@
-body { 
-    font-family: 'Segoe UI', sans-serif; 
-    background: #f8fafc; 
-    margin: 0; padding: 20px; 
+/* global.css — LogiStock Design — usado pelo módulo estoque */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap');
+
+body {
+    font-family: 'Nunito', sans-serif;
+    background: #F4F6FA;
+    margin: 0;
+    padding: 20px;
 }
 
-nav { 
-    background: #0056b3; 
-    padding: 15px; 
-    border-radius: 8px; 
-    text-align: center; 
-    margin-bottom: 20px; 
+nav {
+    background: #0A1628;
+    padding: 14px 20px;
+    border-radius: 14px;
+    text-align: center;
+    margin-bottom: 24px;
+    box-shadow: 0 4px 24px rgba(10,22,40,0.35);
 }
 
-nav button { background: none; 
-    border: 1px solid white; 
-    color: white; 
-    padding: 10px 20px; 
-    cursor: pointer; 
-    margin: 0 5px; 
-    border-radius: 5px; 
+nav button {
+    background: none;
+    border: 2px solid rgba(245,197,24,0.3);
+    color: rgba(255,255,255,0.8);
+    padding: 9px 18px;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 50px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13.5px;
+    transition: 0.28s cubic-bezier(.4,0,.2,1);
+    width: auto;
+}
+nav button:hover {
+    background: rgba(245,197,24,0.12);
+    color: #F5C518;
+    border-color: rgba(245,197,24,0.5);
 }
 
-nav button:hover { 
-    background: white; 
-    color: #0056b3; 
+.container {
+    max-width: 620px;
+    margin: auto;
 }
 
-.container { 
-    max-width: 600px; 
-    margin: auto; 
+.card {
+    background: white;
+    padding: 26px;
+    border-radius: 14px;
+    box-shadow: 0 4px 16px rgba(10,22,40,0.08);
+    margin-bottom: 18px;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    transition: 0.28s cubic-bezier(.4,0,.2,1);
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: #F5C518;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: 0.28s cubic-bezier(.4,0,.2,1);
+}
+.card:hover { border-color: rgba(245,197,24,0.25); }
+.card:hover::before { transform: scaleX(1); }
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+    margin: 10px 0;
+    border: 2px solid #DDE4EE;
+    border-radius: 10px;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    transition: border-color 0.2s;
+}
+input:focus {
+    outline: none;
+    border-color: #F5C518;
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
 }
 
-.card { 
-    background: white; 
-    padding: 20px; 
-    border-radius: 10px; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1); 
-    margin-bottom: 15px; 
+button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    color: #0A1628;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    background: #F5C518;
+    transition: 0.28s cubic-bezier(.4,0,.2,1);
+}
+button:hover {
+    background: #FFD740;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(245,197,24,0.35);
 }
 
-input { 
-    width: 100%; 
-    padding: 12px; 
-    margin: 10px 0; 
-    border: 1px solid #ccc; 
-    border-radius: 5px; 
-    box-sizing: border-box; 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
 }
-
-button { 
-    width: 100%; 
-    padding: 12px; 
-    border: none; 
-    border-radius: 5px; 
-    cursor: pointer; 
-    color: white; 
-    font-weight: bold; 
-    background: #06b6d4; 
+th, td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #DDE4EE;
+    text-align: left;
 }
-
-table { 
-    width: 100%; 
-    border-collapse: collapse; 
-    margin-top: 10px; 
+th {
+    background: #0A1628;
+    color: #F5C518;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: none;
 }
+td { color: #8896AB; font-size: 0.9rem; }
+tr:hover td { background: rgba(245,197,24,0.04); }
 
-th, td { 
-    padding: 12px; 
-    border-bottom: 1px solid #eee; 
-    text-align: left; 
-}
-
-.visor { 
-    font-size: 50px; 
-    text-align: center; 
-    margin: 20px 0; 
-    font-weight: bold; 
-    color: #0056b3; 
+.visor {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 54px;
+    text-align: center;
+    margin: 20px 0;
+    letter-spacing: 3px;
+    color: #0A1628;
 }

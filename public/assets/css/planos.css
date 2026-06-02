@@ -91,7 +91,7 @@
     flex-shrink: 0;
 }
 
-.toggle-btn.ativo { background: var(--primaria); }
+.toggle-btn.ativo { background: var(--yellow, #F5C518); }
 
 .toggle-thumb {
     position: absolute;
@@ -155,7 +155,7 @@ body.dark-mode .plano-card.destaque {
     top: -13px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--primaria);
+    background: var(--yellow, #F5C518);
     color: white;
     padding: 4px 16px;
     font-size: 0.72rem;
@@ -246,7 +246,7 @@ body.dark-mode .badge-destaque { background: var(--secundaria); color: #0f172a; 
 }
 
 .btn-destaque {
-    background: var(--primaria);
+    background: var(--yellow, #F5C518);
     color: white;
 }
 

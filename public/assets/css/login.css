@@ -1,7 +1,26 @@
 /* =========================
    LOGIN / CADASTRO
-   Depende de layout.css
+   LogiStock Design System
 ========================= */
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--navy) 0%, #0d2045 60%, #1a3a6e 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(245,197,24,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,197,24,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
 
 .container {
     min-height: calc(100vh - 160px);
@@ -9,6 +28,8 @@
     justify-content: center;
     align-items: center;
     padding: 40px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 .login-wrapper {
@@ -19,28 +40,26 @@
     gap: 24px;
 }
 
-/* CARD DE FORMULÁRIO */
+/* CARD */
 .login-card {
-    background: var(--bg-card);
-    border-radius: 20px;
-    padding: 36px 32px;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border);
+    background: var(--navy);
+    border-radius: 24px;
+    padding: 48px 40px;
+    box-shadow: 0 32px 80px rgba(10,22,40,0.45);
+    border: 1px solid rgba(245,197,24,0.18);
 }
 
 .login-card h2 {
-    color: var(--text-title);
-    font-size: 1.4rem;
-    font-weight: 800;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--yellow);
     margin-bottom: 22px;
     display: flex;
     align-items: center;
     gap: 10px;
 }
-
-.login-card h2 span {
-    font-size: 1.3rem;
-}
+.login-card h2 span { font-size: 1.3rem; }
 
 /* GRUPO DE INPUT */
 .form-group {
@@ -49,45 +68,61 @@
     gap: 6px;
     margin-bottom: 16px;
 }
-
 .form-group label {
-    font-size: 0.78rem;
+    font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--text-body);
+    letter-spacing: 1px;
+    color: var(--gray2);
 }
+.form-group input,
+.form-group select,
+.form-group textarea {
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(245,197,24,0.2);
+    color: #e6edf3;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
+}
+.form-group input::placeholder { color: var(--gray2); }
 
 /* BOTÃO SUBMIT */
 .btn-submit {
     width: 100%;
-    padding: 13px;
+    padding: 15px;
     margin-top: 6px;
     border: none;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    font-weight: 700;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
     cursor: pointer;
     transition: var(--transition);
-    background: linear-gradient(135deg, var(--primaria), var(--primaria-hover));
-    color: #fff;
-    box-shadow: 0 6px 18px rgba(0,86,179,0.22);
+    background: var(--yellow);
+    color: var(--navy);
+    box-shadow: 0 6px 18px rgba(245,197,24,0.30);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
-
 .btn-submit:hover {
+    background: var(--yellow2);
     transform: translateY(-2px);
-    box-shadow: 0 10px 28px rgba(0,86,179,0.30);
+    box-shadow: 0 10px 28px rgba(245,197,24,0.45);
 }
-
 .btn-submit.outline {
     background: transparent;
-    color: var(--primaria);
-    border: 2px solid var(--primaria);
+    color: var(--yellow);
+    border: 2px solid rgba(245,197,24,0.4);
     box-shadow: none;
 }
-
 .btn-submit.outline:hover {
-    background: rgba(0,86,179,0.06);
+    background: rgba(245,197,24,0.08);
     box-shadow: none;
 }
 
@@ -101,27 +136,23 @@
     padding: 8px 12px;
     border-radius: 8px;
 }
+#mensagem.sucesso { background: rgba(39,174,96,0.2); color: #2ecc71; }
+#mensagem.erro    { background: rgba(231,76,60,0.2);  color: #e74c3c; }
 
-#mensagem.sucesso {
-    background: #dcfce7;
-    color: #166534;
+/* LINK RODAPÉ */
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--gray2);
 }
-
-#mensagem.erro {
-    background: #fee2e2;
-    color: #991b1b;
+.login-footer a {
+    color: var(--yellow);
+    font-weight: 700;
+    text-decoration: none;
 }
-
-body.dark-mode #mensagem.sucesso {
-    background: rgba(22,101,52,0.3);
-    color: #86efac;
-}
-
-body.dark-mode #mensagem.erro {
-    background: rgba(153,27,27,0.3);
-    color: #fca5a5;
-}
+.login-footer a:hover { color: var(--yellow2); }
 
 @media (max-width: 480px) {
-    .login-card { padding: 26px 20px; }
+    .login-card { padding: 32px 22px; }
 }

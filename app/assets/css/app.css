@@ -1,56 +1,63 @@
 /* ===========================
-   CSS VARIABLES — Tema Claro
+   APP DASHBOARD — LogiStock Design
+   Variables herdadas de layout.css via html
 =========================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap');
+
 :root {
-    --bg-page:        #f0f4f8;
-    --bg-header:      #0056b3;
-    --bg-card:        #ffffff;
-    --bg-card-hover:  #f0f9ff;
-    --text-header:    #ffffff;
-    --text-title:     #0056b3;
-    --text-body:      #64748b;
-    --card-border:    #06b6d4;
-    --shadow:         rgba(0,0,0,0.08);
-    --shadow-hover:   rgba(0,0,0,0.16);
-    --toggle-track:   rgba(255,255,255,0.25);
-    --toggle-on:      #06b6d4;
-    --divider:        rgba(255,255,255,0.2);
+    --navy:       #0A1628;
+    --navy2:      #162040;
+    --yellow:     #F5C518;
+    --yellow2:    #FFD740;
+    --white:      #FFFFFF;
+    --gray:       #F4F6FA;
+    --gray2:      #8896AB;
+    --shadow:     0 8px 32px rgba(10,22,40,0.18);
+    --radius:     14px;
+    --transition: 0.28s cubic-bezier(.4,0,.2,1);
+    /* aliases */
+    --bg-page:    var(--gray);
+    --bg-header:  var(--navy);
+    --bg-card:    var(--white);
+    --bg-card-hover: #EEF2F8;
+    --text-header:#FFFFFF;
+    --text-title: var(--navy);
+    --text-body:  var(--gray2);
+    --card-border:var(--yellow);
+    --shadow-sm:  0 4px 10px rgba(10,22,40,0.08);
+    --shadow-hover:0 16px 40px rgba(245,197,24,0.18);
+    --divider:    rgba(245,197,24,0.15);
+    --toggle-track: rgba(245,197,24,0.18);
+    --toggle-on:  var(--yellow);
+    --border:     #DDE4EE;
 }
 
-/* ===========================
-   CSS VARIABLES — Tema Escuro
-=========================== */
 body.dark-mode {
-    --bg-page:        #0f172a;
-    --bg-header:      #1e293b;
-    --bg-card:        #1e293b;
-    --bg-card-hover:  #263248;
-    --text-header:    #e2e8f0;
-    --text-title:     #38bdf8;
-    --text-body:      #94a3b8;
-    --card-border:    #38bdf8;
-    --shadow:         rgba(0,0,0,0.35);
-    --shadow-hover:   rgba(0,0,0,0.55);
-    --toggle-track:   rgba(255,255,255,0.15);
-    --toggle-on:      #38bdf8;
-    --divider:        rgba(255,255,255,0.08);
+    --navy:       #0d1117;
+    --navy2:      #161b22;
+    --gray:       #0d1117;
+    --gray2:      #8b949e;
+    --white:      #1c2128;
+    --shadow:     0 8px 32px rgba(0,0,0,0.5);
+    --bg-page:    #0d1117;
+    --bg-card:    #161b22;
+    --bg-card-hover: #1c2128;
+    --text-title: #e6edf3;
+    --text-body:  #8b949e;
+    --border:     #30363d;
+    --bg-header:  #0d1117;
 }
 
-/* ===========================
-   BASE
-=========================== */
-*, *::before, *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
     background-color: var(--bg-page);
     color: var(--text-body);
     padding: 20px;
-    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    min-height: 100vh;
 }
 
 /* ===========================
@@ -60,50 +67,41 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--bg-header);
+    background: var(--navy);
     color: var(--text-header);
-    padding: 0 2rem;
-    height: 68px;
-    border-radius: 10px;
-    margin-bottom: 24px;
-    box-shadow: 0 4px 16px var(--shadow);
+    padding: 0 28px;
+    height: 72px;
+    border-radius: var(--radius);
+    margin-bottom: 28px;
+    box-shadow: 0 4px 24px rgba(10,22,40,0.35);
     transition: background-color 0.3s;
     gap: 16px;
 }
 
-/* Lado esquerdo: logo + usuário */
-.user-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    min-width: 0;
-}
+.user-info { display: flex; flex-direction: column; justify-content: center; }
 
 .user-info h1 {
-    font-size: 1.25rem;
-    font-weight: 700;
-    line-height: 1.2;
-    white-space: nowrap;
-    color: var(--text-header);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 2px;
+    color: var(--yellow);
+    line-height: 1.1;
 }
 
 .user-info p {
-    font-size: 0.78rem;
-    opacity: 0.75;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray2);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* Lado direito: ações agrupadas */
 .header-actions {
     display: flex;
     align-items: center;
     gap: 0;
     flex-shrink: 0;
 }
-
-/* Separador vertical entre itens da topbar */
 .header-actions > * + * {
     margin-left: 16px;
     padding-left: 16px;
@@ -118,89 +116,74 @@ body {
     align-items: center;
     gap: 8px;
     user-select: none;
+    cursor: pointer;
 }
-
-.theme-icon {
-    font-size: 1rem;
-    line-height: 1;
-}
-
+.theme-icon { font-size: 1rem; line-height: 1; }
 .theme-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--text-header);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gray2);
     white-space: nowrap;
-    opacity: 0.9;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }
 
-/* Switch */
 .toggle-switch {
     position: relative;
     display: inline-block;
-    width: 48px;
-    height: 26px;
+    width: 48px; height: 26px;
     flex-shrink: 0;
 }
-
-.toggle-switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    position: absolute;
-}
-
+.toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
 .slider {
     position: absolute;
     inset: 0;
-    background-color: var(--toggle-track);
+    background: var(--toggle-track);
     border-radius: 26px;
     cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.3);
+    border: 1px solid rgba(245,197,24,0.3);
     transition: background-color 0.3s;
 }
-
 .slider::before {
     content: "";
     position: absolute;
-    width: 18px;
-    height: 18px;
-    left: 3px;
-    top: 50%;
+    width: 18px; height: 18px;
+    left: 3px; top: 50%;
     transform: translateY(-50%);
-    background: #ffffff;
+    background: var(--gray2);
     border-radius: 50%;
     transition: transform 0.3s;
     box-shadow: 0 1px 4px rgba(0,0,0,0.25);
 }
-
 .toggle-switch input:checked + .slider {
-    background-color: var(--toggle-on);
-    border-color: var(--toggle-on);
+    background-color: rgba(245,197,24,0.35);
+    border-color: var(--yellow);
 }
-
 .toggle-switch input:checked + .slider::before {
     transform: translateY(-50%) translateX(22px);
+    background: var(--yellow);
 }
 
 /* ===========================
    BOTÃO SAIR
 =========================== */
 .btn-sair {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
+    background: transparent;
+    color: var(--yellow);
+    border: 2px solid rgba(245,197,24,0.35);
     padding: 8px 18px;
-    border-radius: 6px;
+    border-radius: 50px;
     cursor: pointer;
-    font-weight: 600;
-    font-size: 0.85rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
     white-space: nowrap;
-    transition: background-color 0.2s, transform 0.15s;
-    height: 36px;
+    transition: var(--transition);
+    height: auto;
 }
-
 .btn-sair:hover {
-    background-color: #c0392b;
+    background: var(--yellow);
+    color: var(--navy);
     transform: translateY(-1px);
 }
 
@@ -215,39 +198,53 @@ body {
 .grid-modulos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 20px;
+    gap: 22px;
 }
 
 /* ===========================
    CARDS
 =========================== */
 .card {
-    background-color: var(--bg-card);
-    padding: 22px;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px var(--shadow);
+    background: var(--bg-card);
+    padding: 28px 24px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
     cursor: pointer;
-    border-left: 5px solid var(--card-border);
-    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    transition: var(--transition);
 }
-
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--yellow);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--transition);
+}
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px var(--shadow-hover);
-    background-color: var(--bg-card-hover);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(245,197,24,0.30);
 }
+.card:hover::before { transform: scaleX(1); }
 
+/* Card icon (emoji) */
 .card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+    font-weight: 800;
     color: var(--text-title);
-    font-size: 1rem;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     transition: color 0.3s;
 }
-
 .card p {
+    font-size: 13.5px;
     color: var(--text-body);
-    font-size: 0.875rem;
-    line-height: 1.5;
+    line-height: 1.55;
     transition: color 0.3s;
 }
 
@@ -256,19 +253,17 @@ body {
 =========================== */
 @media (max-width: 600px) {
     body { padding: 12px; }
-
     .header {
         height: auto;
-        padding: 12px 16px;
+        padding: 14px 18px;
         flex-wrap: wrap;
         gap: 12px;
+        border-radius: 12px;
     }
-
     .header-actions {
         width: 100%;
         justify-content: flex-end;
     }
-
     .header-actions > * + * {
         margin-left: 12px;
         padding-left: 12px;

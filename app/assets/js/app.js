@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Verifica login
     const usuario = localStorage.getItem('usuarioLogado');
     if (!usuario) {
-        window.location.href = '/public/pages/login.html';
+        window.location.href = '../public/pages/login.html';
         return;
     }
     const el = document.getElementById('usuario');
@@ -36,7 +36,7 @@ function alternarTema() {
 // ─── Logout ──────────────────────────────────────────────────
 function logout() {
     localStorage.removeItem('usuarioLogado');
-    window.location.href = '/public/pages/login.html';
+    window.location.href = '../public/pages/login.html';
 }
 
 // ─── Módulos não implementados ───────────────────────────────

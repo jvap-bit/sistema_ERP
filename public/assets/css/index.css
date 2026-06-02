@@ -1,90 +1,112 @@
 /* =========================
    INDEX — HERO PAGE
-   Depende de layout.css
+   Depende de layout.css (LogiStock Design)
 ========================= */
 
-/* Fundo decorativo */
 body::before {
     content: "";
     position: fixed;
-    top: -200px;
-    right: -200px;
-    width: 500px;
-    height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(rgba(6,182,212,0.12), transparent 70%);
-    z-index: -1;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(245,197,24,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,197,24,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
     pointer-events: none;
+    z-index: 0;
 }
 
-/* CONTAINER CENTRALIZADO */
+body {
+    background: linear-gradient(135deg, var(--navy) 0%, #0d2045 60%, #1a3a6e 100%);
+    min-height: 100vh;
+}
+
 .container {
     min-height: calc(100vh - 160px);
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 60px 20px;
+    position: relative;
+    z-index: 1;
 }
 
 /* HERO CARD */
 .hero-card {
     width: 100%;
     max-width: 960px;
-    background: rgba(255,255,255,0.82);
+    background: rgba(10, 22, 40, 0.82);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border-radius: 32px;
     padding: 72px 60px;
     text-align: center;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid rgba(255,255,255,0.65);
+    box-shadow: 0 32px 80px rgba(10,22,40,0.50);
+    border: 1px solid rgba(245,197,24,0.18);
     position: relative;
     overflow: hidden;
 }
-
-body.dark-mode .hero-card {
-    background: rgba(30,41,59,0.92);
-    border-color: rgba(255,255,255,0.08);
-}
-
 .hero-card::before {
     content: "";
     position: absolute;
-    width: 320px;
-    height: 320px;
-    background: radial-gradient(rgba(0,86,179,0.09), transparent 70%);
-    top: -140px;
-    left: -140px;
+    width: 320px; height: 320px;
+    background: radial-gradient(rgba(245,197,24,0.08), transparent 70%);
+    top: -140px; left: -140px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+.hero-card::after {
+    content: "";
+    position: absolute;
+    width: 260px; height: 260px;
+    background: radial-gradient(rgba(245,197,24,0.06), transparent 70%);
+    bottom: -120px; right: -120px;
     border-radius: 50%;
     pointer-events: none;
 }
 
+body.dark-mode .hero-card {
+    background: rgba(13, 17, 23, 0.92);
+    border-color: rgba(245,197,24,0.12);
+}
+
+/* BADGE */
+.hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245,197,24,0.12);
+    border: 1px solid rgba(245,197,24,0.3);
+    color: var(--yellow);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 50px;
+    margin-bottom: 22px;
+}
+
 /* TÍTULO */
 .hero-card h1 {
-    font-size: 56px;
-    font-weight: 900;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(42px, 6vw, 72px);
+    font-weight: 400;
+    letter-spacing: 3px;
+    color: var(--white);
     margin-bottom: 20px;
-    letter-spacing: -2px;
-    color: var(--text-title);
+    line-height: 1.0;
     position: relative;
     z-index: 2;
 }
-
-.hero-card h1 span {
-    color: var(--primaria);
-}
-
-body.dark-mode .hero-card h1 span {
-    color: var(--secundaria);
-}
+.hero-card h1 span { color: var(--yellow); }
 
 /* PARÁGRAFO */
 .hero-card > p {
     max-width: 680px;
     margin: 0 auto 40px;
-    color: var(--text-body);
-    font-size: 18px;
-    line-height: 1.9;
+    color: #B8C5D6;
+    font-size: 17px;
+    line-height: 1.8;
     position: relative;
     z-index: 2;
 }
@@ -108,41 +130,32 @@ body.dark-mode .hero-card h1 span {
     position: relative;
     z-index: 2;
 }
-
 .mini-card {
-    background: var(--bg-page);
-    border: 1px solid var(--border);
+    background: rgba(22, 32, 64, 0.7);
+    border: 1px solid rgba(245,197,24,0.18);
     border-radius: 18px;
     padding: 26px 20px;
     transition: var(--transition);
 }
-
-body.dark-mode .mini-card {
-    background: #1e293b;
-    border-color: #334155;
-}
-
 .mini-card:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-md);
-    background: var(--bg-card);
+    box-shadow: 0 8px 24px rgba(245,197,24,0.15);
+    border-color: rgba(245,197,24,0.40);
 }
-
 .mini-card h3 {
-    font-size: 32px;
-    font-weight: 800;
-    color: var(--primaria);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 2px;
+    color: var(--yellow);
     margin-bottom: 6px;
 }
-
-body.dark-mode .mini-card h3 {
-    color: var(--secundaria);
-}
-
 .mini-card span {
-    color: var(--text-body);
-    font-size: 14px;
-    font-weight: 500;
+    color: var(--gray2);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 /* RESPONSIVO */
@@ -150,11 +163,10 @@ body.dark-mode .mini-card h3 {
     .hero-card { padding: 50px 36px; }
     .hero-card h1 { font-size: 42px; }
 }
-
 @media (max-width: 600px) {
     .hero-card { padding: 36px 22px; }
-    .hero-card h1 { font-size: 34px; letter-spacing: -1px; }
+    .hero-card h1 { font-size: 34px; letter-spacing: 2px; }
     .hero-card > p { font-size: 15px; }
-    .botoes { flex-direction: column; }
-    .botoes a, .botoes button { width: 100%; }
+    .botoes { flex-direction: column; align-items: center; }
+    .botoes a, .botoes button { width: 100%; text-align: center; justify-content: center; }
 }

@@ -45,7 +45,8 @@ function fazerLogin() {
     const usuarios = JSON.parse(localStorage.getItem('usuarios') || '{}');
     if (usuarios[gmail] && usuarios[gmail] === senha) {
         localStorage.setItem('usuarioLogado', gmail);
-        window.location.href = '../../app/app.html';
+        const BASE_URL = window.location.origin +'/sistema_ERP/';
+        window.location.href = BASE_URL + 'app/app.html';
     } else {
         mostrarMensagem('E-mail ou senha incorretos.', 'erro');
     }

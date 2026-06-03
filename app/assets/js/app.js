@@ -36,7 +36,8 @@ function alternarTema() {
 // ─── Logout ──────────────────────────────────────────────────
 function logout() {
     localStorage.removeItem('usuarioLogado');
-    window.location.href = '../public/pages/login.html';
+    const BASE_URL = window.location.origin +'/sistema_ERP/';
+        window.location.href = BASE_URL + 'app/app.html';
 }
 
 // ─── Módulos não implementados ───────────────────────────────

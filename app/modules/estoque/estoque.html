@@ -4,60 +4,411 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>S.I.U. - Sistema de Inventário Unificado</title>
+
     <link rel="stylesheet" href="../../assets/css/global.css">
+
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap');
+
+        /* ── Variáveis LogiStock ── */
+        :root {
+            --navy:       #0A1628;
+            --navy2:      #162040;
+            --yellow:     #F5C518;
+            --yellow2:    #FFD740;
+            --bg-body:    #F4F6FA;
+            --bg-card:    #FFFFFF;
+            --bg-input:   #FFFFFF;
+            --text-primary: #0A1628;
+            --text-muted:   #8896AB;
+            --border:       #DDE4EE;
+            --shadow:       0 4px 24px rgba(10,22,40,0.12);
+            --shadow-hover: 0 16px 40px rgba(245,197,24,0.18);
+            --radius:       14px;
+            --transition:   0.28s cubic-bezier(.4,0,.2,1);
+            --divider:      rgba(245,197,24,0.18);
+        }
+
+        body.dark-mode {
+            --bg-body:      #0d1117;
+            --bg-card:      #161b22;
+            --bg-input:     #161b22;
+            --text-primary: #e6edf3;
+            --text-muted:   #8b949e;
+            --border:       #30363d;
+            --shadow:       0 4px 24px rgba(0,0,0,0.45);
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            padding: 0;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* ══════════════════════════════════
+           HEADER
+        ══════════════════════════════════ */
         .header-modulo {
-            background-color: #0056b3;
-            color: white;
-            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 4px solid #06b6d4; /* Cor azul do estoque */
+            background: var(--navy);
+            color: #fff;
+            padding: 0 28px;
+            height: 72px;
+            border-bottom: 3px solid var(--yellow);
+            position: fixed;
+            top: 0; width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 24px rgba(10,22,40,0.35);
+            transition: background 0.3s;
         }
-        .btn-voltar {
-            background: #64748b;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 4px;
-            cursor: pointer;
+
+        .header-brand small {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2px;
         }
-        nav {
-            margin-top: 10px;
+        .header-brand h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin: 0;
+            line-height: 1;
+        }
+
+        .header-actions {
             display: flex;
-            gap: 10px;
+            align-items: center;
+            gap: 0;
+            flex-shrink: 0;
+        }
+        .header-actions > * + * {
+            margin-left: 16px;
+            padding-left: 16px;
+            border-left: 1px solid var(--divider);
+        }
+
+        /* Toggle de tema */
+        .theme-toggle-wrapper {
+            display: flex; align-items: center; gap: 8px;
+            cursor: pointer; user-select: none;
+        }
+        .theme-icon { font-size: 1rem; line-height: 1; }
+        .theme-label {
+            font-size: 11px; font-weight: 700;
+            color: var(--text-muted); letter-spacing: 0.5px;
+            text-transform: uppercase; white-space: nowrap;
+        }
+        .toggle-switch {
+            position: relative; display: inline-block;
+            width: 48px; height: 26px; flex-shrink: 0;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+        .slider {
+            position: absolute; inset: 0;
+            background: rgba(245,197,24,0.18);
+            border-radius: 26px; cursor: pointer;
+            border: 1px solid rgba(245,197,24,0.3);
+            transition: background-color 0.3s;
+        }
+        .slider::before {
+            content: ''; position: absolute;
+            width: 18px; height: 18px;
+            left: 3px; top: 50%; transform: translateY(-50%);
+            background: var(--text-muted); border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+        }
+        .toggle-switch input:checked + .slider { background: rgba(245,197,24,0.35); border-color: var(--yellow); }
+        .toggle-switch input:checked + .slider::before {
+            transform: translateY(-50%) translateX(22px);
+            background: var(--yellow);
+        }
+
+        /* Botão voltar */
+        .btn-voltar {
+            background: transparent;
+            color: var(--yellow);
+            border: 2px solid rgba(245,197,24,0.35);
+            padding: 8px 18px; border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700; font-size: 13px;
+            white-space: nowrap;
+            transition: var(--transition);
+        }
+        .btn-voltar:hover {
+            background: var(--yellow); color: var(--navy);
+            transform: translateY(-1px); box-shadow: none;
+        }
+
+        /* ══════════════════════════════════
+           NAV
+        ══════════════════════════════════ */
+        nav {
+            position: fixed;
+            top: 72px; width: 100%;
+            background: var(--navy);
+            padding: 12px 20px;
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 10px;
+            z-index: 999;
+            border-bottom: 1px solid var(--divider);
+            box-shadow: 0 4px 16px rgba(10,22,40,0.25);
+            border-radius: 0;
+            margin-bottom: 0;
+            transition: background 0.3s;
+        }
+        nav button {
+            background: none;
+            border: 2px solid rgba(245,197,24,0.3);
+            color: rgba(255,255,255,0.8);
+            padding: 9px 20px; cursor: pointer;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700; font-size: 13.5px;
+            transition: var(--transition); width: auto;
+        }
+        nav button:hover {
+            background: rgba(245,197,24,0.12);
+            color: var(--yellow);
+            border-color: rgba(245,197,24,0.5);
+        }
+        nav button.ativo {
+            background: var(--yellow);
+            color: var(--navy);
+            border-color: var(--yellow);
+            font-weight: 800;
+        }
+
+        /* ══════════════════════════════════
+           LAYOUT
+        ══════════════════════════════════ */
+        .container {
+            max-width: 680px;
+            margin: 140px auto 50px;
             padding: 0 20px;
+        }
+
+        /* ══════════════════════════════════
+           CARDS
+        ══════════════════════════════════ */
+        .card {
+            background: var(--bg-card);
+            padding: 28px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 20px;
+            border: 2px solid transparent;
+            position: relative; overflow: hidden;
+            transition: var(--transition);
+        }
+        .card::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; right: 0; height: 4px;
+            background: var(--yellow);
+            transform: scaleX(0); transform-origin: left;
+            transition: var(--transition);
+        }
+        .card:hover { border-color: rgba(245,197,24,0.25); }
+        .card:hover::before { transform: scaleX(1); }
+
+        .card h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px; letter-spacing: 1.5px;
+            color: var(--yellow);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 12px; margin-bottom: 20px;
+        }
+        .card h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 18px; letter-spacing: 1px;
+            color: var(--text-primary); margin: 0 0 4px;
+        }
+        .card h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 15px; letter-spacing: 1.5px;
+            color: var(--yellow); margin-bottom: 14px;
+            text-transform: uppercase;
+        }
+
+        /* Título de seção fora do card */
+        h1.section-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px; letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin-bottom: 18px;
+        }
+
+        /* ══════════════════════════════════
+           INPUTS
+        ══════════════════════════════════ */
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 12px 14px;
+            margin: 8px 0;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.2s, background 0.3s;
+        }
+        input::placeholder { color: var(--text-muted); opacity: 0.7; }
+        input:focus {
+            outline: none;
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
+        }
+
+        /* ══════════════════════════════════
+           BOTÕES
+        ══════════════════════════════════ */
+        .btn-primary {
+            width: 100%; padding: 13px;
+            border: none; border-radius: 12px; cursor: pointer;
+            background: var(--yellow); color: var(--navy);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800; font-size: 15px;
+            transition: var(--transition);
+        }
+        .btn-primary:hover {
+            background: var(--yellow2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(245,197,24,0.35);
+        }
+
+        .btn-entrada {
+            flex: 1; padding: 13px;
+            border: none; border-radius: 12px; cursor: pointer;
+            background: #1a7a4a; color: #fff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800; font-size: 14px;
+            transition: var(--transition); width: auto;
+        }
+        .btn-entrada:hover {
+            filter: brightness(1.12);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26,122,74,0.3);
+        }
+
+        .btn-saida {
+            flex: 1; padding: 13px;
+            border: none; border-radius: 12px; cursor: pointer;
+            background: #c0392b; color: #fff;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800; font-size: 14px;
+            transition: var(--transition); width: auto;
+        }
+        .btn-saida:hover {
+            filter: brightness(1.12);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(192,57,43,0.3);
+        }
+
+        .btn-row {
+            display: flex; gap: 10px; margin-top: 4px;
+        }
+
+        /* ══════════════════════════════════
+           VISOR
+        ══════════════════════════════════ */
+        .visor {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px; text-align: center;
+            margin: 16px 0; letter-spacing: 4px;
+            color: var(--yellow);
+            text-shadow: 0 2px 16px rgba(245,197,24,0.18);
+            transition: color 0.3s;
+        }
+
+        /* ══════════════════════════════════
+           TABELA
+        ══════════════════════════════════ */
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th {
+            padding: 13px 14px;
+            background: var(--navy);
+            color: var(--yellow);
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 13px; letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border-bottom: none; text-align: left;
+        }
+        td {
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-muted); font-size: 0.9rem;
+        }
+        tr:hover td { background: rgba(245,197,24,0.04); }
+
+        body.dark-mode th { background: #161b22; }
+
+        /* ══════════════════════════════════
+           RESPONSIVO
+        ══════════════════════════════════ */
+        @media (max-width: 600px) {
+            .header-modulo { padding: 0 16px; height: auto; flex-wrap: wrap; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
+            .header-actions > * + * { margin-left: 10px; padding-left: 10px; }
+            .container { margin-top: 150px; padding: 0 12px; }
         }
     </style>
 </head>
 <body>
 
+    <!-- ── HEADER ── -->
     <header class="header-modulo">
-        <div>
+        <div class="header-brand">
             <small>Módulo de Operações</small>
-            <h2 style="margin: 0;">📦 Gestão de Inventário</h2>
+            <h2>📦 Gestão de Inventário</h2>
         </div>
-        <button class="btn-voltar" onclick="window.location.href='../../app.html'">
-            ← Voltar ao Menu
-        </button>
+
+        <div class="header-actions">
+            <div class="theme-toggle-wrapper" title="Alternar tema">
+                <span class="theme-icon" id="themeIcon">🌙</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="theme-label" id="themeLabel">Escuro</span>
+            </div>
+
+            <button class="btn-voltar" onclick="window.location.href='../../app.html'">← Voltar ao Menu</button>
+        </div>
     </header>
 
+    <!-- ── NAV ── -->
     <nav>
-        <button onclick="trocarTela('cadastro')"> Recebimento</button>
-        <button onclick="trocarTela('estoque')"> Controle de Estoque</button>
+        <button onclick="trocarTela('cadastro')">📥 Recebimento</button>
+        <button onclick="trocarTela('estoque')">📊 Controle de Estoque</button>
     </nav>
 
+    <!-- ── TELA: ENTRADA DE MATERIAIS ── -->
     <div id="tela-cadastro" class="container">
-        <h1>Entrada de Materiais</h1>
+
         <div class="card">
-            <input type="text" id="nomeItem" placeholder="Nome do Produto">
-            <input type="number" id="qtdItem" placeholder="Quantidade Inicial">
-            <button id="btnRegistrar">Registrar no Sistema</button>
+            <h1>Entrada de Materiais</h1>
+            <input type="text"   id="nomeItem" placeholder="Nome do Produto">
+            <input type="number" id="qtdItem"  placeholder="Quantidade Inicial">
+            <button id="btnRegistrar" class="btn-primary" style="margin-top: 6px;">Registrar no Sistema</button>
         </div>
 
-        <div class="card" style="margin-top: 20px;">
-            <h3>Itens no Pátio (Aguardando Liberação)</h3>
+        <div class="card">
+            <h3>Itens no Pátio — Aguardando Liberação</h3>
             <table>
                 <thead>
                     <tr>
@@ -66,28 +417,55 @@
                         <th>Ação</th>
                     </tr>
                 </thead>
-                <tbody id="corpoTabela">
-                    </tbody>
+                <tbody id="corpoTabela"></tbody>
             </table>
         </div>
+
     </div>
 
-    <div id="tela-estoque" class="container" style="display: none;">
-        <h1>Controle de Saída</h1>
+    <!-- ── TELA: CONTROLE DE SAÍDA ── -->
+    <div id="tela-estoque" class="container" style="display:none;">
+
         <div class="card">
+            <h1>Controle de Saída</h1>
             <h2 id="produtoSelecionado">Nenhum item selecionado</h2>
             <div id="visorQtd" class="visor">0</div>
-            
+
             <input type="number" id="valorMovimentacao" placeholder="Quantidade">
-            <div style="display: flex; gap: 10px;">
-                <button id="btnEntrada" style="background: #27ae60;">+ Entrada</button>
-                <button id="btnSaida" style="background: #c0392b;">- Saída</button>
+            <div class="btn-row">
+                <button id="btnEntrada" class="btn-entrada">+ Entrada</button>
+                <button id="btnSaida"   class="btn-saida">− Saída</button>
             </div>
         </div>
+
     </div>
 
+    <!-- ── SCRIPTS ── -->
     <script src="../../assets/js/estoque.js" defer></script>
     <script defer src="../../assets/js/vlibras.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('themeToggle');
+            const label  = document.getElementById('themeLabel');
+            const icon   = document.getElementById('themeIcon');
+
+            const apply = (t) => {
+                document.body.classList.toggle('dark-mode', t === 'dark');
+                localStorage.setItem('tema', t);
+                const isDark = t === 'dark';
+                if (toggle) toggle.checked = isDark;
+                if (label)  label.textContent = isDark ? 'Escuro' : 'Claro';
+                if (icon)   icon.textContent  = isDark ? '🌙' : '☀️';
+            };
+
+            apply(localStorage.getItem('tema') || 'dark');
+
+            if (toggle) toggle.addEventListener('change', () =>
+                apply(toggle.checked ? 'dark' : 'light')
+            );
+        });
+    </script>
 
 </body>
 </html>

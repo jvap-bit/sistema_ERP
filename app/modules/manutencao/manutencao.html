@@ -6,244 +6,640 @@
     <title>M.A.P - Manutenção Ativa Preventiva</title>
 
     <link rel="stylesheet" href="../../assets/css/manutencao.css">
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
 
     <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Nunito:wght@400;600;700;800&display=swap');
+
+        /* --- Variáveis de página (light) --- */
         :root,
         [data-theme="light"] {
-            --mod-header-bg:    #2c3e50;
-            --mod-nav-bg:       #dfe6e9;
-            --mod-nav-btn-bg:   #ffffff;
-            --mod-nav-btn-text: #2c3e50;
-            --mod-nav-border:   #bdc3c7;
-            --mod-card-bg:      #ffffff;
-            --mod-label:        #34495e;
-            --mod-input-border: #cccccc;
-            --mod-accent:       #0664d7;
-            --mod-accent-dark:  #004080;
-            --mod-accent-border:#3498db;
+            --navy:            #0A1628;
+            --navy2:           #162040;
+            --yellow:          #F5C518;
+            --yellow2:         #FFD740;
+            --bg-body:         #F4F6FA;
+            --bg-header:       #0A1628;
+            --bg-nav:          #0A1628;
+            --bg-card:         #FFFFFF;
+            --bg-input:        #FFFFFF;
+            --text-primary:    #0A1628;
+            --text-muted:      #8896AB;
+            --border-input:    #DDE4EE;
+            --shadow:          0 4px 24px rgba(10,22,40,0.12);
+            --shadow-hover:    0 16px 40px rgba(245,197,24,0.18);
+            --radius:          14px;
+            --transition:      0.28s cubic-bezier(.4,0,.2,1);
+            --divider:         rgba(245,197,24,0.18);
         }
 
+        /* --- Variáveis de página (dark) --- */
         [data-theme="dark"] {
-            --mod-header-bg:    #1e293b;
-            --mod-nav-bg:       #1a2535;
-            --mod-nav-btn-bg:   #263248;
-            --mod-nav-btn-text: #e2e8f0;
-            --mod-nav-border:   #334155;
-            --mod-card-bg:      #1e293b;
-            --mod-label:        #94a3b8;
-            --mod-input-border: #334155;
-            --mod-accent:       #3b82f6;
-            --mod-accent-dark:  #2563eb;
-            --mod-accent-border:#3b82f6;
+            --bg-body:         #0d1117;
+            --bg-header:       #0d1117;
+            --bg-nav:          #0d1117;
+            --bg-card:         #161b22;
+            --bg-input:        #161b22;
+            --text-primary:    #e6edf3;
+            --text-muted:      #8b949e;
+            --border-input:    #30363d;
+            --shadow:          0 4px 24px rgba(0,0,0,0.45);
+            --shadow-hover:    0 16px 40px rgba(245,197,24,0.12);
         }
 
-        :root { --header-height: 100px; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        body { padding: 0; }
+        body {
+            font-family: 'Nunito', sans-serif;
+            background: var(--bg-body);
+            color: var(--text-primary);
+            padding: 0;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
 
+        /* ============================================================
+           HEADER — mesma altura / estilo do app.html
+        ============================================================ */
         .header-modulo {
-            background-color: var(--mod-header-bg);
-            color: white;
-            padding: 0 5%;
-            height: var(--header-height);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 5px solid var(--mod-accent-border);
+            background: var(--bg-header);
+            color: #fff;
+            padding: 0 28px;
+            height: 72px;
+            border-bottom: 3px solid var(--yellow);
             position: fixed;
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-sizing: border-box;
+            box-shadow: 0 4px 24px rgba(10,22,40,0.35);
             transition: background 0.3s;
         }
 
-        .header-modulo small { opacity: 0.75; text-transform: uppercase; letter-spacing: 2px; font-size: 0.85rem; }
-        .header-modulo h2   { margin: 0; font-size: 1.8rem; color: #fff; }
+        .header-brand small {
+            display: block;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
 
-        .header-actions { display: flex; align-items: center; gap: 10px; }
+        .header-brand h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 2px;
+            color: var(--yellow);
+            margin: 0;
+            line-height: 1;
+        }
 
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            flex-shrink: 0;
+        }
+        .header-actions > * + * {
+            margin-left: 16px;
+            padding-left: 16px;
+            border-left: 1px solid var(--divider);
+        }
+
+        /* Toggle de tema (idêntico ao app.html) */
+        .theme-toggle-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .theme-icon { font-size: 1rem; line-height: 1; }
+        .theme-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 48px; height: 26px;
+            flex-shrink: 0;
+        }
+        .toggle-switch input { opacity: 0; width: 0; height: 0; position: absolute; }
+        .slider {
+            position: absolute;
+            inset: 0;
+            background: rgba(245,197,24,0.18);
+            border-radius: 26px;
+            cursor: pointer;
+            border: 1px solid rgba(245,197,24,0.3);
+            transition: background-color 0.3s;
+        }
+        .slider::before {
+            content: '';
+            position: absolute;
+            width: 18px; height: 18px;
+            left: 3px; top: 50%;
+            transform: translateY(-50%);
+            background: var(--text-muted);
+            border-radius: 50%;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.25);
+        }
+        .toggle-switch input:checked + .slider { background: rgba(245,197,24,0.35); border-color: var(--yellow); }
+        .toggle-switch input:checked + .slider::before {
+            transform: translateY(-50%) translateX(22px);
+            background: var(--yellow);
+        }
+
+        /* Botão voltar */
         .btn-voltar {
-            background: var(--mod-accent-border);
-            border: none; color: white; padding: 12px 25px;
-            border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s;
+            background: transparent;
+            color: var(--yellow);
+            border: 2px solid rgba(245,197,24,0.35);
+            padding: 8px 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            white-space: nowrap;
+            transition: var(--transition);
         }
-        .btn-voltar:hover { filter: brightness(0.88); transform: scale(1.04); }
+        .btn-voltar:hover {
+            background: var(--yellow);
+            color: var(--navy);
+            transform: translateY(-1px);
+            box-shadow: none;
+        }
 
-        .theme-toggle-wrap { display: flex; align-items: center; gap: 6px; }
-        .theme-icon { font-size: 1rem; color: rgba(255,255,255,0.8); }
-        .theme-toggle {
-            position: relative; width: 44px; height: 24px;
-            background: #334155; border-radius: 12px; border: none;
-            cursor: pointer; transition: background 0.3s; flex-shrink: 0;
-        }
-        .theme-toggle::after {
-            content: ''; position: absolute; top: 3px; left: 3px;
-            width: 18px; height: 18px; background: #fff;
-            border-radius: 50%; transition: transform 0.3s;
-        }
-        [data-theme="light"] .theme-toggle { background: var(--mod-accent-border); }
-        [data-theme="light"] .theme-toggle::after { transform: translateX(20px); }
-
+        /* ============================================================
+           NAV — mesma barra do manutencao.css
+        ============================================================ */
         .nav-modulo {
-            position: fixed; top: var(--header-height); width: 100%;
-            background: var(--mod-nav-bg); padding: 12px 0;
-            display: flex; justify-content: center; gap: 16px;
-            z-index: 999; box-shadow: 0 2px 5px rgba(0,0,0,0.12);
+            position: fixed;
+            top: 72px;
+            width: 100%;
+            background: var(--bg-nav);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            z-index: 999;
+            border-bottom: 1px solid var(--divider);
+            box-shadow: 0 4px 16px rgba(10,22,40,0.25);
             transition: background 0.3s;
         }
 
         .nav-modulo button {
-            padding: 10px 22px; border: 1px solid var(--mod-nav-border);
-            background: var(--mod-nav-btn-bg); border-radius: 6px;
-            cursor: pointer; font-weight: bold; color: var(--mod-nav-btn-text);
-            width: auto; transition: 0.3s;
+            background: none;
+            border: 2px solid rgba(245,197,24,0.3);
+            color: rgba(255,255,255,0.8);
+            padding: 9px 20px;
+            cursor: pointer;
+            border-radius: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 13.5px;
+            transition: var(--transition);
+            width: auto;
         }
-        .nav-modulo button:hover { background: var(--mod-accent); color: white; border-color: var(--mod-accent); }
+        .nav-modulo button:hover {
+            background: rgba(245,197,24,0.12);
+            color: var(--yellow);
+            border-color: rgba(245,197,24,0.5);
+        }
+        .nav-modulo button.ativo {
+            background: var(--yellow);
+            color: var(--navy);
+            border-color: var(--yellow);
+            font-weight: 800;
+        }
 
-        .app-container { max-width: 950px; margin: 190px auto 50px; padding: 20px; }
+        /* ============================================================
+           LAYOUT PRINCIPAL
+        ============================================================ */
+        .app-container {
+            max-width: 960px;
+            margin: 140px auto 50px;
+            padding: 0 20px;
+        }
 
+        /* ============================================================
+           CARDS — mesmo padrão do app.css
+        ============================================================ */
         .card-app {
-            background: var(--mod-card-bg); border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.10); padding: 30px;
-            margin-bottom: 40px; border-top: 6px solid var(--mod-accent);
-            transition: background 0.3s;
+            background: var(--bg-card);
+            padding: 28px 28px 32px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 24px;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
         }
-        [data-theme="dark"] .card-app { box-shadow: 0 4px 15px rgba(0,0,0,0.35); }
-
-        .card-app h2 { color: var(--mod-accent); border-bottom: 2px solid var(--mod-input-border); padding-bottom: 10px; margin-top: 0; }
-        .card-app h3 { color: var(--mod-accent); margin-top: 40px; }
-
-        .app-form { display: grid; gap: 15px; }
-        .app-form label { font-weight: bold; color: var(--mod-label); font-size: 0.9rem; }
-        .app-form input, .app-form select, .app-form textarea {
-            width: 100%; padding: 12px; border: 1px solid var(--mod-input-border);
-            border-radius: 6px; box-sizing: border-box; font-size: 1rem;
-            background: var(--bg-input, #fff); color: var(--text-primary, #2c3e50);
-            font-family: inherit; transition: border-color 0.2s, background 0.3s; margin: 0;
+        .card-app::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--yellow);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
         }
-        .app-form input:focus, .app-form select:focus, .app-form textarea:focus {
-            outline: none; border-color: var(--mod-accent);
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.18);
-        }
-        .app-form input::placeholder, .app-form textarea::placeholder { color: var(--mod-label); opacity: 0.6; }
+        .card-app:hover { border-color: rgba(245,197,24,0.25); }
+        .card-app:hover::before { transform: scaleX(1); }
 
-        .btn-app {
-            background: var(--mod-accent); color: white; padding: 15px; border: none;
-            border-radius: 6px; cursor: pointer; font-weight: bold; text-transform: uppercase;
-            width: 100%; font-family: inherit; transition: background 0.2s;
+        .card-app h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            border-bottom: 1px solid var(--border-input);
+            padding-bottom: 12px;
+            margin-bottom: 22px;
         }
-        .btn-app:hover { background: var(--mod-accent-dark); filter: none; }
-
-        .btn-outline-app {
-            background: transparent; border: 2px solid var(--mod-accent);
-            color: var(--mod-accent); margin-top: 10px;
+        .card-app h3 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            letter-spacing: 1.5px;
+            color: var(--yellow);
+            margin: 32px 0 14px;
+            text-transform: uppercase;
         }
-        .btn-outline-app:hover { background: var(--mod-accent); color: white; }
 
-        .busca-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        /* ============================================================
+           BOTÕES DE AÇÃO (exportar / importar)
+        ============================================================ */
+        .action-row {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 22px;
+            flex-wrap: wrap;
+        }
+        .btn-action {
+            flex: 1;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 7px;
+            padding: 11px 16px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 0.3px;
+            transition: var(--transition);
+            width: auto;
+            color: #fff;
+        }
+        .btn-action:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            filter: brightness(1.07);
+        }
+        .btn-action.excel  { background: #1a7a4a; }
+        .btn-action.pdf    { background: #c0392b; }
+        .btn-action.import { background: #d97706; }
+
+        /* ============================================================
+           FORMULÁRIOS
+        ============================================================ */
+        .app-form { display: grid; gap: 14px; }
+
+        .app-form label {
+            display: block;
+            font-weight: 700;
+            color: var(--text-muted);
+            font-size: 11px;
+            letter-spacing: 0.7px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .app-form input,
+        .app-form select,
+        .app-form textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid var(--border-input);
+            border-radius: 10px;
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            margin: 0;
+            transition: border-color 0.2s, background 0.3s;
+        }
+        .app-form input::placeholder,
+        .app-form textarea::placeholder { color: var(--text-muted); opacity: 0.7; }
+        .app-form input:focus,
+        .app-form select:focus,
+        .app-form textarea:focus {
+            outline: none;
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
+        }
+
+        /* Submit principal */
+        .btn-submit {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            background: var(--yellow);
+            color: var(--navy);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+        }
+        .btn-submit:hover {
+            background: var(--yellow2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(245,197,24,0.35);
+        }
+
+        /* Botão outline */
+        .btn-outline {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid rgba(245,197,24,0.4);
+            border-radius: 12px;
+            cursor: pointer;
+            background: transparent;
+            color: var(--yellow);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: var(--transition);
+        }
+        .btn-outline:hover {
+            background: var(--yellow);
+            color: var(--navy);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(245,197,24,0.25);
+        }
+
+        /* ============================================================
+           BUSCA
+        ============================================================ */
+        .busca-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
         .busca-row input {
-            flex: 1; padding: 12px; border-radius: 6px; border: 1px solid var(--mod-input-border);
-            background: var(--bg-input, #fff); color: var(--text-primary, #2c3e50);
-            font-family: inherit; margin: 0; transition: background 0.3s;
+            flex: 1;
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: 2px solid var(--border-input);
+            background: var(--bg-input);
+            color: var(--text-primary);
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            margin: 0;
+            transition: border-color 0.2s, background 0.3s;
         }
-        .busca-row .btn-app { width: auto; padding: 12px 24px; }
+        .busca-row input:focus {
+            outline: none;
+            border-color: var(--yellow);
+            box-shadow: 0 0 0 3px rgba(245,197,24,0.12);
+        }
+        .busca-row .btn-busca {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: var(--yellow);
+            color: var(--navy);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            width: auto;
+            transition: var(--transition);
+        }
+        .busca-row .btn-busca:hover {
+            background: var(--yellow2);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245,197,24,0.3);
+        }
 
+        /* ============================================================
+           BADGES
+        ============================================================ */
         .badge-alerta {
-            display: inline-block; background: #fff3cd; color: #856404;
-            border: 1px solid #ffc107; border-radius: 20px; padding: 3px 12px;
-            font-size: 0.78rem; font-weight: bold; margin-left: 8px; vertical-align: middle;
+            display: inline-block;
+            background: rgba(255,193,7,0.15);
+            color: #F5C518;
+            border: 1px solid rgba(245,197,24,0.4);
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+            vertical-align: middle;
         }
         .badge-ok {
-            display: inline-block; background: #d1e7dd; color: #0a3622;
-            border: 1px solid #a3cfbb; border-radius: 20px; padding: 3px 12px;
-            font-size: 0.78rem; font-weight: bold; margin-left: 8px; vertical-align: middle;
+            display: inline-block;
+            background: rgba(25,135,84,0.15);
+            color: #4ade80;
+            border: 1px solid rgba(25,135,84,0.35);
+            border-radius: 20px;
+            padding: 3px 12px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+            vertical-align: middle;
         }
-        [data-theme="dark"] .badge-alerta { background: rgba(255,193,7,0.15); color: #ffc107; border-color: rgba(255,193,7,0.3); }
-        [data-theme="dark"] .badge-ok     { background: rgba(25,135,84,0.15);  color: #4ade80; border-color: rgba(25,135,84,0.3); }
+        [data-theme="light"] .badge-alerta {
+            background: #fff3cd; color: #856404; border-color: #ffc107;
+        }
+        [data-theme="light"] .badge-ok {
+            background: #d1e7dd; color: #0a3622; border-color: #a3cfbb;
+        }
 
-        .maq-card { padding: 15px; margin-top: 10px; border-radius: 6px; transition: background 0.3s; }
-        .maq-card.alerta { border-left: 5px solid #ffc107; background: #fffbf0; }
-        .maq-card.ok     { border-left: 5px solid #198754; background: #f8f9fa; }
-        [data-theme="dark"] .maq-card.alerta { background: rgba(255,193,7,0.08); }
-        [data-theme="dark"] .maq-card.ok     { background: rgba(25,135,84,0.08); }
+        /* ============================================================
+           CARDS DE MÁQUINA
+        ============================================================ */
+        .maq-card {
+            padding: 14px 16px;
+            margin-top: 10px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .maq-card.alerta {
+            border-left: 4px solid var(--yellow);
+            background: rgba(245,197,24,0.06);
+        }
+        .maq-card.ok {
+            border-left: 4px solid #198754;
+            background: rgba(25,135,84,0.06);
+        }
+        [data-theme="light"] .maq-card.alerta { background: #fffbf0; }
+        [data-theme="light"] .maq-card.ok     { background: #f8f9fa; }
 
-        /* Aviso de lista vazia no select de OS */
+        /* ============================================================
+           MENSAGENS DE FEEDBACK
+        ============================================================ */
+        #dadosmaquina, #ordem_servico {
+            text-align: center;
+            margin-top: 10px;
+            color: var(--yellow);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
         .select-vazio-aviso {
-            font-size: 0.82rem;
-            color: #e74c3c;
-            margin-top: 4px;
             display: none;
+            font-size: 0.82rem;
+            color: #ef4444;
+            margin-top: 4px;
+            font-weight: 600;
         }
 
-        #dadosmaquina, #ordem_servico { text-align: center; margin-top: 10px; color: var(--mod-accent); font-size: 0.92rem; }
+        /* ============================================================
+           FOOTER
+        ============================================================ */
+        footer {
+            background: var(--navy);
+            color: var(--text-muted);
+            text-align: center;
+            padding: 24px 30px;
+            border-top: 3px solid var(--yellow);
+            font-family: 'Nunito', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
 
-        footer { margin-top: 0; }
+        /* ============================================================
+           RESPONSIVO
+        ============================================================ */
+        @media (max-width: 600px) {
+            .header-modulo { padding: 0 16px; height: auto; flex-wrap: wrap; gap: 10px; padding-top: 12px; padding-bottom: 12px; }
+            .header-actions > * + * { margin-left: 10px; padding-left: 10px; }
+            .app-container { margin-top: 150px; padding: 0 12px; }
+            .action-row { flex-direction: column; }
+            .btn-action { width: 100%; }
+        }
     </style>
 </head>
 <body>
 
-    <script>(function(){ document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || 'dark'); })();</script>
+    <!-- Aplica tema antes do render para evitar flash -->
+    <script>(function(){
+        var t = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') document.documentElement.style.backgroundColor = '#0d1117';
+    })();</script>
 
+    <!-- ============================================================
+         HEADER
+    ============================================================ -->
     <header class="header-modulo">
-        <div>
+        <div class="header-brand">
             <small>Módulo de Manutenção</small>
             <h2>⚙️ Manutenção Preventiva</h2>
         </div>
+
         <div class="header-actions">
-            <div class="theme-toggle-wrap">
+            <div class="theme-toggle-wrapper" title="Alternar tema">
                 <span class="theme-icon" id="themeIcon">🌙</span>
-                <button class="theme-toggle" id="themeToggle" aria-label="Alternar tema"></button>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="themeToggle">
+                    <span class="slider"></span>
+                </label>
+                <span class="theme-label" id="themeLabel">Escuro</span>
             </div>
+
             <button class="btn-voltar" onclick="window.location.href='../../app.html'">← Voltar ao Menu</button>
         </div>
     </header>
 
+    <!-- ============================================================
+         NAV
+    ============================================================ -->
     <nav class="nav-modulo">
         <button onclick="trocarTela('cadastro')">📥 Gestão de Máquinas</button>
         <button onclick="trocarTela('estoque')">📊 Ordens de Serviço</button>
     </nav>
 
+    <!-- ============================================================
+         CONTEÚDO PRINCIPAL
+    ============================================================ -->
     <main class="app-container">
 
+        <!-- Seção: Gestão de Máquinas -->
         <section class="card-app">
             <h2>Gestão de Máquinas</h2>
-            
-            <div style="display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;">
-                <button onclick="exportarExcel()" class="btn-app" style="background-color: #27ae60; flex: 1;">📥 Exportar Excel</button>
-                <button onclick="exportarPDF()" class="btn-app" style="background-color: #c0392b; flex: 1;">📄 Exportar PDF</button>
-                <button onclick="document.getElementById('fileImport').click()" class="btn-app" style="background-color: #f39c12; flex: 1;">📤 Importar Excel</button>
-                
-                <input type="file" id="fileImport" accept=".xlsx, .xls" style="display: none;" onchange="importarExcel(event)">
+
+            <div class="action-row">
+                <button onclick="exportarExcel()" class="btn-action excel">📥 Exportar Excel</button>
+                <button onclick="exportarPDF()"   class="btn-action pdf">📄 Exportar PDF</button>
+                <button onclick="document.getElementById('fileImport').click()" class="btn-action import">📤 Importar Excel</button>
+                <input type="file" id="fileImport" accept=".xlsx,.xls" style="display:none;" onchange="importarExcel(event)">
             </div>
-            
+
             <form id="cadastroMaquinas" class="app-form">
-                <div><label>Nome da Máquina:</label><input type="text" id="nomeMaquina" placeholder="Ex: Torno CNC" required /></div>
-                <div><label>Modelo:</label><input type="text" id="modelo" placeholder="Ex: G-200" required /></div>
-                <div><label>Número de Série:</label><input type="text" id="numeroSerie" placeholder="Ex: SN-12345" required /></div>
-                <div><label>Data da Última Manutenção:</label><input type="date" id="dataUltimaManutencao" required /></div>
-                <button type="submit" class="btn-app">Cadastrar Equipamento</button>
+                <div>
+                    <label>Nome da Máquina</label>
+                    <input type="text" id="nomeMaquina" placeholder="Ex: Torno CNC" required />
+                </div>
+                <div>
+                    <label>Modelo</label>
+                    <input type="text" id="modelo" placeholder="Ex: G-200" required />
+                </div>
+                <div>
+                    <label>Número de Série</label>
+                    <input type="text" id="numeroSerie" placeholder="Ex: SN-12345" required />
+                </div>
+                <div>
+                    <label>Data da Última Manutenção</label>
+                    <input type="date" id="dataUltimaManutencao" required />
+                </div>
+                <button type="submit" class="btn-submit">Cadastrar Equipamento</button>
             </form>
             <p id="dadosmaquina"></p>
 
             <h3>Consultar Inventário</h3>
             <div class="busca-row">
                 <input type="text" id="buscaNomeMaquinas" placeholder="Filtrar por nome...">
-                <button id="btnBuscarMaquinas" class="btn-app">Filtrar</button>
+                <button id="btnBuscarMaquinas" class="btn-busca">Filtrar</button>
             </div>
-            <button id="btnConsultarMaquinas" class="btn-app btn-outline-app">Exibir Tudo</button>
+            <button id="btnConsultarMaquinas" class="btn-outline">Exibir Tudo</button>
             <div id="listaMaquina"></div>
         </section>
 
+        <!-- Seção: Ordens de Serviço -->
         <section class="card-app">
             <h2>Ordens de Serviço</h2>
+
             <form id="ordemServico" class="app-form">
                 <div>
-                    <label>Máquina Identificada:</label>
+                    <label>Máquina Identificada</label>
                     <select id="maquinaOS" required>
                         <option value="">-- Nenhuma máquina cadastrada --</option>
                     </select>
@@ -251,46 +647,61 @@
                         ⚠️ Cadastre ao menos uma máquina antes de abrir uma Ordem de Serviço.
                     </small>
                 </div>
-                <div><label>Descrição do Problema/Serviço:</label><textarea id="descricaoOS" rows="3" required></textarea></div>
                 <div>
-                    <label>Status Atual:</label>
+                    <label>Descrição do Problema / Serviço</label>
+                    <textarea id="descricaoOS" rows="3" required></textarea>
+                </div>
+                <div>
+                    <label>Status Atual</label>
                     <select id="statusOS" required>
                         <option value="pendente">Pendente</option>
                         <option value="em andamento">Em andamento</option>
                         <option value="concluido">Concluído</option>
                     </select>
                 </div>
-                <button type="submit" class="btn-app">Abrir Ordem de Serviço</button>
+                <button type="submit" class="btn-submit">Abrir Ordem de Serviço</button>
             </form>
             <p id="ordem_servico"></p>
 
             <h3>Histórico de Intervenções</h3>
-            <button id="btnConsultarOS" class="btn-app btn-outline-app">Atualizar Histórico</button>
+            <button id="btnConsultarOS" class="btn-outline">Atualizar Histórico</button>
             <div id="listaOS"></div>
         </section>
 
     </main>
 
     <footer>
-        <p>&copy; 2026 M.A.P - Manutenção Ativa Preventiva</p>
+        <p>&copy; 2026 M.A.P – Manutenção Ativa Preventiva</p>
     </footer>
 
+    <!-- ============================================================
+         SCRIPTS
+    ============================================================ -->
     <script src="../../assets/js/manutencao.js"></script>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const btn  = document.getElementById('themeToggle');
-            const icon = document.getElementById('themeIcon');
-            const aplicar = (t) => {
+            const toggle = document.getElementById('themeToggle');
+            const label  = document.getElementById('themeLabel');
+            const icon   = document.getElementById('themeIcon');
+
+            const apply = (t) => {
                 document.documentElement.setAttribute('data-theme', t);
                 localStorage.setItem('theme', t);
-                if (icon) icon.textContent = t === 'dark' ? '🌙' : '☀️';
+                const isDark = t === 'dark';
+                if (toggle) toggle.checked = isDark;
+                if (label)  label.textContent = isDark ? 'Escuro' : 'Claro';
+                if (icon)   icon.textContent  = isDark ? '🌙' : '☀️';
             };
-            aplicar(localStorage.getItem('theme') || 'dark');
-            if (btn) btn.addEventListener('click', () =>
-                aplicar(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark')
+
+            apply(localStorage.getItem('theme') || 'dark');
+
+            if (toggle) toggle.addEventListener('change', () =>
+                apply(toggle.checked ? 'dark' : 'light')
             );
         });
     </script>
+
     <script src="../../assets/js/acessibilidade.js"></script>
 
 </body>

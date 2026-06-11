@@ -567,7 +567,7 @@ body.dark-mode .perfil-bar select  { background: #0f172a; color: #f1f5f9; border
     box-sizing: border-box;
 }
 .modal-close {
-    background: #162040;
+    background: #f1f5f9;
     color: var(--texto);
     border: none;
     border-radius: 8px;
@@ -577,6 +577,12 @@ body.dark-mode .perfil-bar select  { background: #0f172a; color: #f1f5f9; border
     margin-top: 16px;
     width: auto;
 }
+
+.dark-mode .modal-close { 
+    background: #f1c40f; 
+    color: #0A1628; 
+}
+
 .modal-content .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;

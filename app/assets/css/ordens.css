@@ -540,8 +540,20 @@ body.dark-mode .perfil-bar select  { background: #0f172a; color: #f1f5f9; border
     overflow-y: auto;
     box-shadow: 0 20px 60px rgba(0,0,0,0.2);
 }
-.modal-content h3       { color: #0A1628; font-size: 20px; margin-bottom: 18px; }
-.modal-content p        { margin: 8px 0; font-size: 14px; color: var(--texto); padding: 0; border: none; }
+.modal-content h3       { 
+    color: var(--texto-leve); 
+    font-size: 20px; 
+    margin-bottom: 18px; 
+}
+
+.modal-content p        { 
+    margin: 8px 0; 
+    font-size: 14px; 
+    color: var(--texto); 
+    padding: 0; 
+    border: none; 
+}
+
 .modal-content textarea {
     width: 100%;
     border: 1px solid var(--cinza-borda);
@@ -555,7 +567,7 @@ body.dark-mode .perfil-bar select  { background: #0f172a; color: #f1f5f9; border
     box-sizing: border-box;
 }
 .modal-close {
-    background: #f1f5f9;
+    background: #162040;
     color: var(--texto);
     border: none;
     border-radius: 8px;

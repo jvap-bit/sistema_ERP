@@ -176,7 +176,7 @@ body.dark-mode .secao-titulo { color: var(--secundaria); }
     background: conic-gradient(
         var(--secundaria)  0%  45%,
         var(--primaria)   45%  75%,
-        #a5f3fc           75% 100%
+        #9f0fff           75% 100%
     );
     position: relative;
     box-shadow: var(--shadow-md);

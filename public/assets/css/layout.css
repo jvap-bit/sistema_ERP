@@ -241,9 +241,20 @@ th {
     text-transform: uppercase;
 }
 td { color: var(--text-body); font-size: 0.9rem; }
-tr:last-child td { border-bottom: none; }
-tr:hover td { background: rgba(245,197,24,0.04); }
-body.dark-mode th { background: var(--navy2); color: var(--yellow); }
+
+tr:last-child td { 
+    border-bottom: none; 
+}
+
+tr:hover td { 
+    background: rgba(245,197,24,0.04); 
+}
+
+body.dark-mode th { 
+    background: var(--navy2); 
+    color: var(--yellow); 
+}
+
 
 /* =========================
    HEADER PREMIUM

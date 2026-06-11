@@ -100,6 +100,10 @@ body.dark-mode .hero-card {
 }
 .hero-card h1 span { color: var(--yellow); }
 
+body.dark-mode .hero-card h1 {
+    color: var(--gray2);
+}
+
 /* PARÁGRAFO */
 .hero-card > p {
     max-width: 680px;
